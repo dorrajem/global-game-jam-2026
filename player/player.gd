@@ -31,7 +31,12 @@ var invulnerable_timer: float = 0.0
 
 # References
 var current_target: Node3D = null
-@onready var audio_stream = $AudioStreamPlayer2D
+
+#audio players
+@onready var dash_audio = $dashAudio
+@onready var hurt_audio = $hurtAudio
+@onready var death_audio = $deathAudio
+
 
 
 signal vision_changed(new_vision: float, max_vision: float)
@@ -134,7 +139,7 @@ func try_dash(target: Node3D):
 		current_target = target
 		
 		#dash audio
-		audio_stream.play()
+		dash_audio.play()
 		
 		# Spawn dash VFX
 		VFXManager.spawn_dash_effect(global_position)
@@ -156,6 +161,9 @@ func take_damage(damage: float = 0.0):
 	# Visual feedback
 	VFXManager.spawn_hit_effect(global_position)
 	VFXManager.screen_shake(0.3, 0.15)
+	
+	#AUDIO 
+	hurt_audio.play()
 	
 	# Check for death
 	if current_vision <= 0:
@@ -179,6 +187,8 @@ func die():
 	player_died.emit()
 	# You can add death animation/effects here
 	set_physics_process(false)
+	death_audio.play()
+	
 
 func _on_body_entered(body: Node3D):
 	if body.is_in_group("enemy"):

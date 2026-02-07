@@ -25,6 +25,12 @@ var mesh_instance : MeshInstance3D = null
 var original_material : Material = null
 var is_targeted : bool = false
 
+#3D audio 
+var max_hearing_dist = 30
+var min_vol = -60
+var max_vol = 0 
+
+
 # adding audio 
 @onready var audio_stream: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
@@ -83,6 +89,14 @@ func _physics_process(delta: float) -> void:
 			_attack_player()
 			if distance_to_player > attack_range * 1.2:
 				_change_state(State.CHASE)
+				
+				
+	var ghost_pos = player.global_position
+	ghost_pos.x = global_position.x
+	ghost_pos.y = player.global_position.y
+	ghost_pos.z = player.global_position.z +1 
+	
+	audio_stream.global_position= ghost_pos
 	
 	move_and_slide()
 
@@ -134,13 +148,8 @@ func _change_state(new_state : State):
 			
 		
 		State.CHASE:
-			print(self.global_position)
-			if(global_position.x >=0): 
-				audio_stream.position.x = global_position.x + 5
-				print('left')
-			else:
-				audio_stream.position.x = global_position.x - 5
-				print('right')
+			
+			audio_stream.position.z = player.global_position.z + 1
 			audio_stream.play(0.10) 
 		
 		State.ATTACK:
