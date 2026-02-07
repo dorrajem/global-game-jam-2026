@@ -6,13 +6,12 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_l2ndj"]
 
-[node name="Player" type="Node3D"]
-
-[node name="Body" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_3qydi")
 
-[node name="Collision" type="CollisionShape3D" parent="Body"]
+[node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_0rwas")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+[node name="Body" type="MeshInstance3D" parent="Collision"]
 mesh = SubResource("SphereMesh_l2ndj")
+skeleton = NodePath("")

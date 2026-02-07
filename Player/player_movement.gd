@@ -11,25 +11,30 @@ var current_speed : float = 0.0
 var dash_timer : float = 0.0
 var cooldown_timer : float = 0.0
 
-func ready():
+func _ready():
 	# Start with the base speed
 	current_speed = base_speed
-	print("Initial speed set to: ", current_speed)
+	print("Player initialized - Speed: ", current_speed)
 
 
-func physics_process(delta):
+func _physics_process(delta):
 	# Handle timers
 	update_timers(delta)
 	
-	# Get input for steering (-1 for left, 1 for right, 0 for none)
-	var steer_input = Input.get_axis("move_right", "move_left")
-	# Invert if needed: For "move_left" as left key, "move_right" as right key
-	# This makes pressing right = turn right, pressing left = turn left
-	steer_input = -steer_input
+	# Get input for steering
+	# Input.get_axis returns -1 to 1 (negative = left key, positive = right key)
+	var steer_input = Input.get_axis("move_left", "move_right")
+	
+	# DEBUG: Print input values every frame
+	print("Steer Input: ", steer_input, " | Speed: ", current_speed, " | Velocity: ", velocity)
 	
 	# Handle dash input (Spacebar by default)
-	if Input.is_action_just_pressed("dash") and cooldown_timer <= 0:
-		activate_dash()
+	if Input.is_action_just_pressed("dash"):
+		print("DASH INPUT DETECTED!")
+		if cooldown_timer <= 0:
+			activate_dash()
+		else:
+			print("  -> But dash is on cooldown: ", cooldown_timer)
 	
 	# Apply movement based on current state
 	apply_movement(delta, steer_input)
@@ -50,8 +55,9 @@ func activate_dash():
 	dash_timer = dash_duration
 	cooldown_timer = dash_cooldown
 	current_speed = dash_speed
+	print("DASH!")
 	# Optional: Add visual/audio effects here
-	# e.g., $Particles.emitting = true
+	# e.g., $DashParticles.emitting = true
 
 func apply_movement(delta, steer_input):
 	# 1. Calculate forward direction (always moving in -Z direction of the sphere)
@@ -72,17 +78,13 @@ func apply_movement(delta, steer_input):
 
 func apply_visual_roll(delta):
 	# This rotates the visual mesh to look like it's rolling
-	var mesh = $MeshInstance3D  # Adjust if your mesh has a different path
-	if mesh and velocity.length() > 0.1:
-		var roll_speed = current_speed * delta
+	# Path matches your structure: Player/Collision/Body
+	var body = $Collision/Body
+	if body and velocity.length() > 0.1:
+		var roll_speed = current_speed * delta * 0.5
 		# Roll around local X-axis based on forward movement
-		mesh.rotate_x(roll_speed)
+		body.rotate_x(roll_speed)
 		# Add slight tilt when steering for a more dynamic look
-		if Input.is_action_pressed("move_left"):
-			mesh.rotate_z(0.02)
-		elif Input.is_action_pressed("move_right"):
-			mesh.rotate_z(-0.02)
-
-# Optional: Add this for debug info in the Output panel
-func _process(delta):
-	print("Speed: ", current_speed, " | Dash Timer: ", dash_timer, " | Cooldown: ", cooldown_timer)
+		var current_steer = Input.get_axis("move_left", "move_right")
+		var tilt = current_steer * 0.3 * delta if abs(current_steer) > 0.1 else 0.0
+		body.rotation.z = lerp(body.rotation.z, tilt, delta * 5.0)
