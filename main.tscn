@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bongv1ujfib42"]
+
+[ext_resource type="PackedScene" uid="uid://vjfllgvprsx7" path="res://enemy.tscn" id="2_h2yge"]
+
+[node name="Node3D" type="Node3D" unique_id=493698188]
+
+[node name="enemy" parent="." unique_id=1937625786 instance=ExtResource("2_h2yge")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1545159628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0066895485, 0.008347988, 19.276142)
+fov = 61.283302
