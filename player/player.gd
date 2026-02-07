@@ -168,7 +168,7 @@ func _on_body_entered(body: Node3D):
 		if is_dashing and body == current_target:
 			# Kill enemy on dash hit
 			VFXManager.spawn_hit_effect(body.global_position)
-			VFXManager.screen_shake(0.2, 0.1)
+			VFXManager.screen_shake(1, 0.5)
 			enemy_killed.emit(body)
 			body.queue_free()
 		elif not is_invulnerable:

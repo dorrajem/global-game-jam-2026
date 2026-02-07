@@ -20,7 +20,7 @@ func _ready():
 	if not hit_particle_scene:
 		hit_particle_scene = _create_simple_particles(Color.RED)
 	if not powerup_collect_scene:
-		powerup_collect_scene = _create_simple_particles(Color.GREEN)
+		powerup_collect_scene = _create_simple_particles(Color.YELLOW)
 
 static func spawn_dash_effect(pos: Vector3):
 	if instance and instance.dash_particle_scene:
