@@ -6,21 +6,18 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw1ev"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.5019608)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7k104"]
 material = SubResource("StandardMaterial3D_fw1ev")
 
-[node name="enemy" type="CharacterBody3D" unique_id=1937625786 groups=["enemy"]]
+[node name="Enemy" type="CharacterBody3D" unique_id=1752096227 groups=["enemy"]]
 script = ExtResource("1_7k104")
+metadata/_custom_type_script = "uid://cr75ru314ehna"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1823051974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4gyqm")
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1536581039]
-aabb = AABB(-0.62381524, -1.0646827, -1, 1.2476305, 2.1293654, 2)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1119516756]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_7k104")
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

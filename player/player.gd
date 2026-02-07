@@ -42,7 +42,6 @@ func _ready():
 	vision_changed.emit(current_vision, max_vision)
 
 func _physics_process(delta: float):
-	print("Player : ", current_vision)
 	# Update timers
 	if dash_timer > 0:
 		dash_timer -= delta

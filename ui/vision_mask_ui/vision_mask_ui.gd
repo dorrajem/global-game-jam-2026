@@ -26,7 +26,6 @@ func _ready() -> void:
 	_update_mask_positions(0.0)
 
 func _process(delta: float) -> void:
-	print("UI : ", current_vision)
 	# smoothly animate mask height
 	if top_mask and bottom_mask:
 		var current_height : float = top_mask.size.y

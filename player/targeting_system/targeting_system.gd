@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 	# update target indicator
 	if target_indicator and current_target:
 		target_indicator.visible = true
-		target_indicator.global_position = current_target.global_position
+		target_indicator.global_position = current_target.global_position + Vector3.UP
 	elif target_indicator:
 		target_indicator.visible = false
 

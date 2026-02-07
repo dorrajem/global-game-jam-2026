@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d2k47ug46qryn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ape5r"]
+emission_enabled = true
+emission = Color(0.8, 0, 0.1882353, 1)
+emission_energy_multiplier = 100.0
+rim_enabled = true
+rim = 0.05
+
+[sub_resource type="SphereMesh" id="SphereMesh_dtqx1"]
+material = SubResource("StandardMaterial3D_ape5r")
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[node name="TargetIndicator" type="MeshInstance3D" unique_id=1933398823]
+mesh = SubResource("SphereMesh_dtqx1")
