@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://player/targeting_system/targeting_system.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c1xnytwvc7tdh" path="res://powerups/powerup_heal.tscn" id="5_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://crjnbch7f34vc" path="res://powerups/powerup_speed.tscn" id="6_w48qg"]
+[ext_resource type="PackedScene" uid="uid://dknro6n11r6b4" path="res://enemies/flying_enemy.tscn" id="7_2cqfq"]
 [ext_resource type="Script" uid="uid://ecoo03mjjmyx" path="res://game_manager/game_manager.gd" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://diw7ysi1ymirj" path="res://powerups/powerup_invulnerability.tscn" id="7_vivmo"]
 [ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://player/dash_telegraph.gd" id="8_5vw27"]
@@ -62,14 +63,6 @@ follow_height = 1.0
 follow_smoothness = 10.0
 metadata/_custom_type_script = "uid://cpcgytufl4ydx"
 
-[node name="TerrainGenerator" type="Node3D" parent="." unique_id=873277094]
-script = ExtResource("1_ig7tw")
-max_height = 5.0
-obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6")])
-enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
-powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])
-metadata/_custom_type_script = "uid://e7ir03kjeff4"
-
 [node name="TargetingSystem" parent="." unique_id=327083549 node_paths=PackedStringArray("player", "camera", "target_indicator") instance=ExtResource("4_lquwl")]
 player = NodePath("../Player")
 camera = NodePath("../Player/FollowCamera")
@@ -102,3 +95,11 @@ metadata/_custom_type_script = "uid://cu46suqky75dn"
 [node name="VFXManager" type="Node3D" parent="." unique_id=2113399577]
 script = ExtResource("9_kek77")
 metadata/_custom_type_script = "uid://dhf3edhtv3635"
+
+[node name="TerrainGenerator" type="Node3D" parent="." unique_id=2020132531]
+script = ExtResource("1_ig7tw")
+obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6")])
+enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
+flying_enemy_scenes = Array[PackedScene]([ExtResource("7_2cqfq")])
+powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])
+metadata/_custom_type_script = "uid://e7ir03kjeff4"

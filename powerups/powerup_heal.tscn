@@ -17,7 +17,15 @@ height = 0.8
 radial_segments = 4
 rings = 4
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8eeqh"]
+albedo_color = Color(0, 1, 0.28235295, 1)
+emission_enabled = true
+emission = Color(0, 1, 0.28235295, 1)
+emission_energy_multiplier = 7.5
+
 [node name="PowerupHeal" type="Area3D" unique_id=367035610]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_02g1a")
 heal_amount = 25.0
 metadata/_custom_type_script = "uid://cl7h3rel4u5cf"
@@ -26,4 +34,6 @@ metadata/_custom_type_script = "uid://cl7h3rel4u5cf"
 shape = SubResource("SphereShape3D_02g1a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1631192289]
+transform = Transform3D(0.9401907, 0, -0.34063837, 0, 1, 0, 0.34063837, 0, 0.9401907, 0, 0, 0)
 mesh = SubResource("SphereMesh_02g1a")
+surface_material_override/0 = SubResource("StandardMaterial3D_8eeqh")

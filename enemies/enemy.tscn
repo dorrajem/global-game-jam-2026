@@ -19,6 +19,7 @@ radial_segments = 4
 rings = 1
 
 [node name="Enemy" type="CharacterBody3D" unique_id=1752096227]
+collision_mask = 3
 script = ExtResource("1_7k104")
 metadata/_custom_type_script = "uid://cr75ru314ehna"
 
@@ -29,3 +30,7 @@ shape = SubResource("CapsuleShape3D_4gyqm")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1119516756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_7k104")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=277905693]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

@@ -13,6 +13,7 @@ material = SubResource("StandardMaterial3D_1i8ur")
 size = Vector3(0.5, 0.5, 1)
 
 [node name="ObstacleSone" type="StaticBody3D" unique_id=1496918776]
+collision_mask = 3
 script = ExtResource("1_1i8ur")
 metadata/_custom_type_script = "uid://owx1vxfbywjq"
 

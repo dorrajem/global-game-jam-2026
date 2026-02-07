@@ -7,6 +7,7 @@ class_name GameManager
 
 # UI elements
 var score_label: Label
+var hp_label : Label
 var game_over_panel: Panel
 var restart_button: Button
 
@@ -28,10 +29,12 @@ func _ready():
 	if player:
 		player.player_died.connect(_on_player_died)
 		player.enemy_killed.connect(_on_enemy_killed)
+		player.vision_changed.connect(_on_vision_changed)
 	
 	# Find UI elements
 	if ui_layer:
 		score_label = ui_layer.get_node_or_null("ScoreLabel")
+		hp_label = ui_layer.get_node_or_null("HealthLabel")
 		game_over_panel = ui_layer.get_node_or_null("GameOverPanel")
 		restart_button = ui_layer.get_node_or_null("GameOverPanel/RestartButton")
 		
@@ -92,3 +95,6 @@ func _update_score_display():
 
 func _on_restart_pressed():
 	get_tree().reload_current_scene()
+
+func _on_vision_changed(new_vision, max_vision):
+	hp_label.text = str(int(new_vision)) +  " HP"

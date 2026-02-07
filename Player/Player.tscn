@@ -6,7 +6,12 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0rwas"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_oul6g"]
+radius = 0.4
+
 [node name="Player" type="CharacterBody3D" unique_id=1286140647 groups=["player"]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_3qydi")
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1656571471]
@@ -14,3 +19,12 @@ mesh = SubResource("SphereMesh_l2ndj")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=703061043]
 shape = SubResource("SphereShape3D_0rwas")
+
+[node name="HitBox" type="Area3D" parent="." unique_id=801780515]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=1204324357]
+shape = SubResource("SphereShape3D_oul6g")
+debug_color = Color(0.8935708, 0.32173693, 0, 0.41960785)
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
