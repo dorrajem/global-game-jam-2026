@@ -122,7 +122,7 @@ func try_dash(target: Node3D):
 		current_target = target
 		
 		# Spawn dash VFX
-		#VFXManager.spawn_dash_effect(global_position)
+		VFXManager.spawn_dash_effect(global_position)
 		
 		return true
 	
@@ -137,8 +137,8 @@ func take_damage(damage: float = 0.0):
 	vision_changed.emit(current_vision, max_vision)
 	
 	# Visual feedback
-	#VFXManager.spawn_hit_effect(global_position)
-	#VFXManager.screen_shake(0.3, 0.15)
+	VFXManager.spawn_hit_effect(global_position)
+	VFXManager.screen_shake(0.3, 0.15)
 	
 	# Check for death
 	if current_vision <= 0:
@@ -167,8 +167,8 @@ func _on_body_entered(body: Node3D):
 	if body.is_in_group("enemy"):
 		if is_dashing and body == current_target:
 			# Kill enemy on dash hit
-			#VFXManager.spawn_hit_effect(body.global_position)
-			#VFXManager.screen_shake(0.2, 0.1)
+			VFXManager.spawn_hit_effect(body.global_position)
+			VFXManager.screen_shake(0.2, 0.1)
 			enemy_killed.emit(body)
 			body.queue_free()
 		elif not is_invulnerable:

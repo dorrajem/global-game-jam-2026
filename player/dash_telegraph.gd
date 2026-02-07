@@ -39,7 +39,7 @@ func _process(_delta: float):
 	
 	line_mesh.clear_surfaces()
 	
-	var target = targeting_system.get_current_target()
+	var target = targeting_system.current_target
 	
 	if target and is_instance_valid(target) and not player.is_dashing:
 		# Draw line from player to target

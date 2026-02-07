@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://4kmisqnv5jaw" path="res://ui/vision_mask_ui/ui.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://player/targeting_system/targeting_system.tscn" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://ecoo03mjjmyx" path="res://game_manager/game_manager.gd" id="7_272bh"]
+[ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://player/dash_telegraph.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://dhf3edhtv3635" path="res://vfx/vfx_manager.gd" id="9_kek77"]
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
@@ -19,6 +21,12 @@ visible = false
 
 [node name="Player" parent="." unique_id=1286140647 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+
+[node name="DashTelegraph" type="Node3D" parent="." unique_id=1665449141 node_paths=PackedStringArray("player", "targeting_system")]
+script = ExtResource("8_5vw27")
+player = NodePath("../Player")
+targeting_system = NodePath("../TargetingSystem")
+metadata/_custom_type_script = "uid://cu46suqky75dn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1435141562]
 transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, 0, 0, 0)
@@ -39,3 +47,7 @@ script = ExtResource("7_272bh")
 player = NodePath("../Player")
 ui_layer = NodePath("../CanvasLayer")
 metadata/_custom_type_script = "uid://ecoo03mjjmyx"
+
+[node name="VFXManager" type="Node3D" parent="." unique_id=2113399577]
+script = ExtResource("9_kek77")
+metadata/_custom_type_script = "uid://dhf3edhtv3635"
