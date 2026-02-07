@@ -1,11 +1,47 @@
 [gd_scene format=3 uid="uid://bongv1ujfib42"]
 
-[ext_resource type="PackedScene" uid="uid://vjfllgvprsx7" path="res://enemy.tscn" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://e7ir03kjeff4" path="res://terrain_generation/terrain_generator.gd" id="1_ig7tw"]
 
-[node name="Node3D" type="Node3D" unique_id=493698188]
+[node name="Main" type="Node3D" unique_id=46566031]
 
-[node name="enemy" parent="." unique_id=1937625786 instance=ExtResource("2_h2yge")]
+[node name="TerrainGenerator" type="Node3D" parent="." unique_id=1212191561]
+script = ExtResource("1_ig7tw")
+metadata/_custom_type_script = "uid://e7ir03kjeff4"
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1545159628]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0066895485, 0.008347988, 19.276142)
-fov = 61.283302
+[node name="Player (CharacterBody3D)s" type="Node3D" parent="." unique_id=1930010276 groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="Collision" type="Node" parent="Player (CharacterBody3D)s" unique_id=1803262382]
+
+[node name="Mesh" type="Node" parent="Player (CharacterBody3D)s" unique_id=695113165]
+
+[node name="Camera3D" type="Camera3D" parent="Player (CharacterBody3D)s" unique_id=258427171]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 3, -8)
+
+[node name="TargetingSystem (Node3D)s" type="Node" parent="." unique_id=1123812943]
+
+[node name="TargetingIndicator (Node3D)" type="Node" parent="TargetingSystem (Node3D)s" unique_id=1282464151]
+
+[node name="GameManager(Node)s" type="Node" parent="." unique_id=665914810]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1435141562]
+transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, 0, 0, 0)
+shadow_enabled = true
+
+[node name="UI (CanvasLayer)s" type="Node" parent="." unique_id=1960411520]
+
+[node name="TopMask (ColorRect)" type="Node" parent="UI (CanvasLayer)s" unique_id=1675589802]
+
+[node name="BottomMask (ColorRect)" type="Node" parent="UI (CanvasLayer)s" unique_id=210446765]
+
+[node name="ScoreLabel" type="Node" parent="UI (CanvasLayer)s" unique_id=842368858]
+
+[node name="GameOverPanel (Panel)" type="Node" parent="UI (CanvasLayer)s" unique_id=1805577661]
+
+[node name="VBoxContainer" type="Node" parent="UI (CanvasLayer)s/GameOverPanel (Panel)" unique_id=1826339800]
+
+[node name="GameOverLabel" type="Node" parent="UI (CanvasLayer)s/GameOverPanel (Panel)/VBoxContainer" unique_id=445491383]
+
+[node name="FinalScoreLabel" type="Node" parent="UI (CanvasLayer)s/GameOverPanel (Panel)/VBoxContainer" unique_id=1233458346]
+
+[node name="RestartButton" type="Node" parent="UI (CanvasLayer)s/GameOverPanel (Panel)/VBoxContainer" unique_id=73203851]
