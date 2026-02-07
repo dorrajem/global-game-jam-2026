@@ -3,14 +3,14 @@ extends CharacterBody3D
 
 
 # Movement settings
-@export var forward_speed: float = 10.0
-@export var max_lateral_speed: float = 8.0
-@export var acceleration: float = 15.0
+@export var forward_speed: float = 25.0
+@export var max_lateral_speed: float = 10.0
+@export var acceleration: float = 20.0
 @export var friction: float = 10.0
 @export var gravity: float = 20.0
 
 # Dash settings
-@export var dash_speed: float = 25.0
+@export var dash_speed: float = 100.0
 @export var dash_duration: float = 0.3
 @export var dash_cooldown: float = 0.5
 
@@ -20,7 +20,7 @@ extends CharacterBody3D
 @export var vision_regen_rate: float = 5.0
 
 # State variables
-var current_vision: float = 100.0
+var current_vision: float = 50.0
 var lateral_velocity: float = 0.0
 var is_dashing: bool = false
 var dash_timer: float = 0.0
@@ -38,10 +38,11 @@ signal enemy_killed(enemy: Node3D)
 
 func _ready():
 	# Initialize
-	current_vision = max_vision
+	current_vision = 50.0
 	vision_changed.emit(current_vision, max_vision)
 
 func _physics_process(delta: float):
+	print("Player : ", current_vision)
 	# Update timers
 	if dash_timer > 0:
 		dash_timer -= delta

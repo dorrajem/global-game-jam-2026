@@ -34,7 +34,7 @@ extends Node3D
 var active_chunks : Array[TerrainChunk] = []
 var chunk_pool : Array[TerrainChunk] = []
 var current_chunk_index : int = 0
-var player : Node3D = null
+var player : CharacterBody3D = null
 var noise : FastNoiseLite
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 

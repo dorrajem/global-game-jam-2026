@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://cj1w0na2joqw7"]
+
+[ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="1_b8som"]
+
+[resource]
+font = ExtResource("1_b8som")
+font_size = 64

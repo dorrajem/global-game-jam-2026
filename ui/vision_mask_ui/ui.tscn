@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://4kmisqnv5jaw"]
+
+[ext_resource type="Script" uid="uid://c22pq5ka6pdok" path="res://ui/vision_mask_ui/vision_mask_ui.gd" id="1_mafg4"]
+[ext_resource type="LabelSettings" uid="uid://cj1w0na2joqw7" path="res://ui/fonts/score_label_settings.tres" id="2_l2pe0"]
+[ext_resource type="LabelSettings" uid="uid://h1uve2q6y80" path="res://ui/fonts/game_over_label_settings.tres" id="3_6ke2l"]
+[ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="4_qailb"]
+
+[node name="UI" type="Control" unique_id=843492477]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mafg4")
+
+[node name="TopMask" type="ColorRect" parent="." unique_id=701927039]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BottomMask" type="ColorRect" parent="." unique_id=2013168182]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.1415927
+pivot_offset_ratio = Vector2(0.5, 0)
+color = Color(0, 0, 0, 1)
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=457374581]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 164.0
+offset_bottom = 64.0
+text = "Score : 0"
+label_settings = ExtResource("2_l2pe0")
+vertical_alignment = 1
+
+[node name="GameOverPanel" type="Panel" parent="." unique_id=982191135]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -250.0
+offset_right = 375.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel" unique_id=2103736763]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -120.0
+offset_right = 375.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="GameOverPanel/VBoxContainer" unique_id=586840662]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = ExtResource("3_6ke2l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="GameOverPanel/VBoxContainer" unique_id=1247399947]
+layout_mode = 2
+text = "Final Score : 0"
+label_settings = ExtResource("2_l2pe0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameOverPanel/VBoxContainer" unique_id=991220396]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("4_qailb")
+theme_override_font_sizes/font_size = 72
+text = "Restart"

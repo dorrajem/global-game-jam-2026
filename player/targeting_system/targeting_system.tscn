@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dfity6h7sjcy1"]
+
+[ext_resource type="Script" uid="uid://b4vdevstcif62" path="res://player/targeting_system/targeting_system.gd" id="1_68ima"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ape5r"]
+emission_enabled = true
+emission = Color(0.8, 0, 0.1882353, 1)
+emission_energy_multiplier = 16.0
+rim = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_dtqx1"]
+material = SubResource("StandardMaterial3D_ape5r")
+
+[node name="TargetingSystem" type="Node3D" unique_id=327083549]
+script = ExtResource("1_68ima")
+metadata/_custom_type_script = "uid://b4vdevstcif62"
+
+[node name="TargetIndicator" type="MeshInstance3D" parent="." unique_id=1686725777]
+mesh = SubResource("SphereMesh_dtqx1")
