@@ -46,6 +46,7 @@ func _process(_delta: float):
 		_draw_line(player.global_position, target.global_position)
 
 func _draw_line(from: Vector3, to: Vector3):
+	to.y += 1.0
 	line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	line_mesh.surface_add_vertex(from)
 	line_mesh.surface_add_vertex(to)

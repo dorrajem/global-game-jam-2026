@@ -19,7 +19,15 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=320
 window/size/viewport_height=288
-window/stretch/mode="canvas_items"
+window/size/mode=3
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
+[importer_defaults]
+
+texture={
+&"detect_3d/compress_to": 0
+}
 
 [input]
 
@@ -53,4 +61,6 @@ dash={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=3
 rendering_device/driver.windows="d3d12"
+shading/overrides/force_vertex_shading=true

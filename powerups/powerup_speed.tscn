@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cl7h3rel4u5cf" path="res://powerups/powerup.gd" id="1_dotsg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dotsg"]
+radius = 0.7129172
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dotsg"]
 albedo_color = Color(0.5019608, 0.38431373, 1, 1)
@@ -15,7 +16,8 @@ material = SubResource("StandardMaterial3D_dotsg")
 radius = 0.4
 height = 0.8
 radial_segments = 4
-rings = 4
+rings = 1
+is_hemisphere = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e36lm"]
 albedo_color = Color(0.5019608, 0.38431373, 1, 1)
@@ -31,9 +33,10 @@ powerup_type = 1
 metadata/_custom_type_script = "uid://cl7h3rel4u5cf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2069995067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_dotsg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1822328482]
-transform = Transform3D(0.9234673, 0, -0.38367367, 0, 1, 0, 0.38367367, 0, 0.9234673, 0, 0, 0)
+transform = Transform3D(0.086341545, 0, 0.99624395, 0, 1, 0, -0.99624395, 0, 0.086341545, 0, 0, 0)
 mesh = SubResource("SphereMesh_e36lm")
 surface_material_override/0 = SubResource("StandardMaterial3D_e36lm")

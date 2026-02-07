@@ -15,8 +15,17 @@
 [ext_resource type="PackedScene" uid="uid://diw7ysi1ymirj" path="res://powerups/powerup_invulnerability.tscn" id="7_vivmo"]
 [ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://player/dash_telegraph.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://dhf3edhtv3635" path="res://vfx/vfx_manager.gd" id="9_kek77"]
+[ext_resource type="Shader" uid="uid://dfb2djrkv8nna" path="res://shaders/ps1_post_processing.gdshader" id="16_2cqfq"]
+[ext_resource type="Shader" uid="uid://by1eyv8eldkf1" path="res://shaders/ps1_models.gdshader" id="16_yaehf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ycdy4"]
+sky_top_color = Color(0.23570955, 0, 0.07320034, 1)
+sky_horizon_color = Color(0.37293845, 0.57057774, 0.6112957, 1)
+sky_curve = 0.053033058
+ground_bottom_color = Color(0.20074686, 0.33543596, 0.36478618, 1)
+ground_horizon_color = Color(0.37254903, 0.5686275, 0.6117647, 1)
+use_debanding = false
+energy_multiplier = 0.5
 
 [sub_resource type="Sky" id="Sky_w48qg"]
 sky_material = SubResource("ProceduralSkyMaterial_ycdy4")
@@ -24,26 +33,44 @@ sky_material = SubResource("ProceduralSkyMaterial_ycdy4")
 [sub_resource type="Environment" id="Environment_ycdy4"]
 background_mode = 2
 sky = SubResource("Sky_w48qg")
+ambient_light_source = 2
+ambient_light_color = Color(0.29456222, 0, 0.0012957881, 1)
 tonemap_mode = 3
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true
 glow_normalized = true
-glow_intensity = 0.5
+glow_intensity = 0.75
 glow_bloom = 0.3
 fog_enabled = true
-fog_sun_scatter = 0.25
-fog_density = 0.005
+fog_mode = 1
+fog_density = 0.5
+fog_aerial_perspective = 0.75
 fog_sky_affect = 0.5
+fog_depth_curve = 0.4352752
+fog_depth_begin = 20.0
+fog_depth_end = 80.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
-volumetric_fog_length = 256.0
+volumetric_fog_anisotropy = 0.8
+volumetric_fog_sky_affect = 0.5
+adjustment_enabled = true
 
-[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_w48qg"]
-frustum_focus_distance = 16.0
-frustum_focal_length = 150.0
-frustum_far = 24.0
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_2cqfq"]
+frustum_focus_distance = 64.0
+frustum_focal_length = 100.0
+frustum_near = 1.0
+frustum_far = 256.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_074og"]
+render_priority = 0
+shader = ExtResource("16_yaehf")
+shader_parameter/snap_enabled = true
+shader_parameter/snap_resolution = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
+shader = ExtResource("16_2cqfq")
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
@@ -83,7 +110,7 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=436450161]
 environment = SubResource("Environment_ycdy4")
-camera_attributes = SubResource("CameraAttributesPhysical_w48qg")
+camera_attributes = SubResource("CameraAttributesPhysical_2cqfq")
 
 [node name="DashTelegraph" type="Node3D" parent="." unique_id=1665449141 node_paths=PackedStringArray("player", "targeting_system")]
 script = ExtResource("8_5vw27")
@@ -98,8 +125,20 @@ metadata/_custom_type_script = "uid://dhf3edhtv3635"
 
 [node name="TerrainGenerator" type="Node3D" parent="." unique_id=2020132531]
 script = ExtResource("1_ig7tw")
+chunk_width = 35.5
 obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6")])
 enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
 flying_enemy_scenes = Array[PackedScene]([ExtResource("7_2cqfq")])
 powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])
+terrain_material = SubResource("ShaderMaterial_074og")
 metadata/_custom_type_script = "uid://e7ir03kjeff4"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=425460047]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=558390509]
+material = SubResource("ShaderMaterial_vivmo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
