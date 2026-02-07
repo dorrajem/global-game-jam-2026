@@ -48,5 +48,5 @@ func _process(_delta: float):
 func _draw_line(from: Vector3, to: Vector3):
 	line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	line_mesh.surface_add_vertex(from)
-	line_mesh.surface_end()
 	line_mesh.surface_add_vertex(to)
+	line_mesh.surface_end()
