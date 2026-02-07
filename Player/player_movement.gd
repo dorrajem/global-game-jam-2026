@@ -77,13 +77,13 @@ func _physics_process(delta: float):
 
 func _handle_normal_movement(delta: float):
 	# Constant forward movement
-	velocity.z = -forward_speed
+	velocity.z = forward_speed
 	
 	# Get input for lateral movement
 	var input_dir: float = 0.0
-	if Input.is_action_pressed("move_left"):
-		input_dir -= 1.0
 	if Input.is_action_pressed("move_right"):
+		input_dir -= 1.0
+	if Input.is_action_pressed("move_left"):
 		input_dir += 1.0
 	
 	# Apply momentum-based lateral movement

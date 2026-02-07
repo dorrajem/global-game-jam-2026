@@ -1,4 +1,4 @@
-#@tool
+@tool
 class_name TerrainGenerator
 extends Node3D
 
