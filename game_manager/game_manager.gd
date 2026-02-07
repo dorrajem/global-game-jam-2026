@@ -3,7 +3,7 @@ class_name GameManager
 
 # References
 @export var player: Player
-@export var ui_layer: CanvasLayer
+@export var ui_layer: Control
 
 # UI elements
 var score_label: Label
@@ -19,6 +19,7 @@ signal game_started
 signal game_over
 
 func _ready():
+	self.add_to_group("enemy")
 	# Find player if not assigned
 	if not player:
 		await get_tree().process_frame
@@ -30,9 +31,9 @@ func _ready():
 	
 	# Find UI elements
 	if ui_layer:
-		score_label = ui_layer.get_children()[0].get_node_or_null("ScoreLabel")
-		game_over_panel = ui_layer.get_children()[0].get_node_or_null("GameOverPanel")
-		restart_button = ui_layer.get_children()[0].get_node_or_null("GameOverPanel/RestartButton")
+		score_label = ui_layer.get_node_or_null("ScoreLabel")
+		game_over_panel = ui_layer.get_node_or_null("GameOverPanel")
+		restart_button = ui_layer.get_node_or_null("GameOverPanel/RestartButton")
 		
 		if restart_button:
 			restart_button.pressed.connect(_on_restart_pressed)

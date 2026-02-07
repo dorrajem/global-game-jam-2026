@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://crjnbch7f34vc"]
+
+[ext_resource type="Script" uid="uid://cl7h3rel4u5cf" path="res://powerups/powerup.gd" id="1_dotsg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dotsg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dotsg"]
+albedo_color = Color(0.5019608, 0.38431373, 1, 1)
+emission_enabled = true
+emission = Color(0.5019608, 0.38431373, 1, 1)
+emission_energy_multiplier = 7.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_e36lm"]
+material = SubResource("StandardMaterial3D_dotsg")
+radius = 0.4
+height = 0.8
+radial_segments = 4
+rings = 4
+
+[node name="PowerupSpeed" type="Area3D" unique_id=1219514787]
+script = ExtResource("1_dotsg")
+powerup_type = 1
+metadata/_custom_type_script = "uid://cl7h3rel4u5cf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2069995067]
+shape = SubResource("SphereShape3D_dotsg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1822328482]
+mesh = SubResource("SphereMesh_e36lm")

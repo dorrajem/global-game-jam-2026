@@ -1,3 +1,4 @@
+@tool
 class_name Powerup
 extends Area3D
 
@@ -60,22 +61,22 @@ func _setup_visual():
 
 	match powerup_type:
 		PowerupType.HEAL:
-			material.albedo_color = Color.GREEN
+			material.albedo_color = Color("00ff48")
 			material.emission_enabled = true
-			material.emission = Color.GREEN
-			material.emission_energy = 1.5
+			material.emission = Color("00ff48")
+			material.emission_energy = 7.5
 
 		PowerupType.SPEED_BOOST:
-			material.albedo_color = Color.YELLOW
+			material.albedo_color = Color("8062ff")
 			material.emission_enabled = true
-			material.emission = Color.YELLOW
-			material.emission_energy = 1.5
+			material.emission = Color("8062ff")
+			material.emission_energy = 7.5
 
 		PowerupType.INVULNERABILITY:
-			material.albedo_color = Color.CYAN
+			material.albedo_color = Color("ffb861")
 			material.emission_enabled = true
-			material.emission = Color.CYAN
-			material.emission_energy = 1.5
+			material.emission = Color("ffb861")
+			material.emission_energy = 7.5
 
 	mesh_instance.set_surface_override_material(0, material)
 

@@ -38,14 +38,6 @@ var player : CharacterBody3D = null
 var noise : FastNoiseLite
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-class TerrainChunk:
-	var mesh_instance : MeshInstance3D
-	var collision_shape : CollisionShape3D
-	var static_body : StaticBody3D
-	var objects : Array[Node3D] = []
-	var chunk_index : int
-	var z_position : float
-
 func _ready() -> void:
 	# initialize noise for height variation
 	rng.randomize()
@@ -121,20 +113,20 @@ func _initialize_chunk(chunk : TerrainChunk):
 	chunk.static_body.add_child(chunk.mesh_instance)
 	
 	# DEBUG CUBE
-	var debug_cube = MeshInstance3D.new()
-	var cube_mesh = BoxMesh.new()
-	cube_mesh.size = Vector3(1, 10, 1)
-	debug_cube.mesh = cube_mesh
-	var red_mat = StandardMaterial3D.new()
-	red_mat.albedo_color = Color.RED
-	red_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	debug_cube.material_override = red_mat
-	chunk.static_body.add_child(debug_cube)
+	#var debug_cube = MeshInstance3D.new()
+	#var cube_mesh = BoxMesh.new()
+	#cube_mesh.size = Vector3(1, 10, 1)
+	#debug_cube.mesh = cube_mesh
+	#var red_mat = StandardMaterial3D.new()
+	#red_mat.albedo_color = Color.RED
+	#red_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	#debug_cube.material_override = red_mat
+	#chunk.static_body.add_child(debug_cube)
 	
 	if not terrain_material:
 		# create a default bright green material
 		var default_mat : StandardMaterial3D = StandardMaterial3D.new()
-		default_mat.albedo_color = Color(0.2, 0.8, 0.2)
+		default_mat.albedo_color = Color(0.269, 0.163, 0.19, 1.0)
 		default_mat.roughness = 1.0
 		chunk.mesh_instance.material_override = default_mat
 	else:

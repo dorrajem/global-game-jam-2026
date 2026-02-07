@@ -4,6 +4,7 @@ extends Control
 # references
 @onready var top_mask: ColorRect = $TopMask
 @onready var bottom_mask: ColorRect = $BottomMask
+@onready var score_label: Label = $ScoreLabel
 
 # settings
 @export var min_mask_height : float = 0.0 # full vision

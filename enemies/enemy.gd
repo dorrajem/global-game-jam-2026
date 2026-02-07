@@ -23,7 +23,6 @@ var is_targeted : bool = false
 
 func _ready() -> void:
 	spawn_position = global_position
-	add_to_group("enemy")
 	
 	# find player
 	await get_tree().process_frame

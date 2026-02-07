@@ -3,14 +3,22 @@
 [ext_resource type="Script" uid="uid://cr75ru314ehna" path="res://enemies/enemy.gd" id="1_7k104"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
+radius = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw1ev"]
 transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.8, 0, 0.1882353, 1)
+roughness = 0.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7k104"]
 material = SubResource("StandardMaterial3D_fw1ev")
+radius = 0.4
+radial_segments = 4
+rings = 1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1752096227 groups=["enemy"]]
+[node name="Enemy" type="CharacterBody3D" unique_id=1752096227]
 script = ExtResource("1_7k104")
 metadata/_custom_type_script = "uid://cr75ru314ehna"
 

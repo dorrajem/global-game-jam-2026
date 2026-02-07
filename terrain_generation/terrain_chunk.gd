@@ -1,4 +1,4 @@
-class_name TerrainChunks
+class_name TerrainChunk
 extends Node
 
 var mesh_instance : MeshInstance3D
