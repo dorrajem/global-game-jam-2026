@@ -71,6 +71,7 @@ shader_parameter/albedo_texture = ExtResource("17_074og")
 shader_parameter/texture_tile = Vector2(1, 1)
 shader_parameter/snap_enabled = true
 shader_parameter/snap_resolution = 148.0
+shader_parameter/affine_weight = 0.30000001425
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
 shader = ExtResource("16_2cqfq")
@@ -88,6 +89,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
 doppler_tracking = 2
 current = true
+fov = 62.5
+near = 1.0
+far = 256.0
 script = ExtResource("2_w48qg")
 target = NodePath("..")
 follow_distance = 0.0
@@ -124,8 +128,9 @@ targeting_system = NodePath("../TargetingSystem")
 line_color = Color(0.59, 0.45193997, 0.4307, 1)
 metadata/_custom_type_script = "uid://cu46suqky75dn"
 
-[node name="VFXManager" type="Node3D" parent="." unique_id=2113399577]
+[node name="VFXManager" type="Node3D" parent="." unique_id=2113399577 node_paths=PackedStringArray("canvas_layer")]
 script = ExtResource("9_kek77")
+canvas_layer = NodePath("../CanvasLayer")
 metadata/_custom_type_script = "uid://dhf3edhtv3635"
 
 [node name="TerrainGenerator" type="Node3D" parent="." unique_id=2020132531]
@@ -138,7 +143,7 @@ powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48q
 terrain_material = SubResource("ShaderMaterial_yaehf")
 metadata/_custom_type_script = "uid://e7ir03kjeff4"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=425460047]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=425460047 groups=["canvas_layer"]]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=558390509]
 material = SubResource("ShaderMaterial_vivmo")

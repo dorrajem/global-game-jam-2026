@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://4kmisqnv5jaw"]
 
 [ext_resource type="Script" uid="uid://c22pq5ka6pdok" path="res://ui/vision_mask_ui/vision_mask_ui.gd" id="1_mafg4"]
+[ext_resource type="Texture2D" uid="uid://u7fsqke5nhsp" path="res://assets/overlays/heal overlay.png" id="2_17bum"]
 [ext_resource type="LabelSettings" uid="uid://cj1w0na2joqw7" path="res://ui/fonts/score_label_settings.tres" id="2_l2pe0"]
 [ext_resource type="LabelSettings" uid="uid://h1uve2q6y80" path="res://ui/fonts/game_over_label_settings.tres" id="3_6ke2l"]
 [ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="4_qailb"]
@@ -14,6 +15,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mafg4")
 metadata/_custom_type_script = "uid://c22pq5ka6pdok"
+
+[node name="ReactionVignette" type="TextureRect" parent="." unique_id=1924246310]
+visible = false
+modulate = Color(0.5208437, 1, 0.44306, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_17bum")
+metadata/_edit_use_anchors_ = true
 
 [node name="TopMask" type="ColorRect" parent="." unique_id=701927039]
 layout_mode = 1

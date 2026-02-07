@@ -10,11 +10,14 @@ enum PowerupType { HEAL, SPEED_BOOST, INVULNERABILITY }
 @export var effect_duration: float = 5.0
 @export var rotation_speed: float = 2.0
 
+signal powerup_pickup(powerup : String)
+
 var mesh_instance: MeshInstance3D
 
 func _ready():
 	add_to_group("powerup")
 	body_entered.connect(_on_body_entered)
+	powerup_pickup.connect(_on_pickup_overlay)
 
 	# Find mesh for rotation
 	mesh_instance = _find_mesh_instance(self)
@@ -41,16 +44,19 @@ func _apply_effect(player: Node3D):
 		PowerupType.HEAL:
 			if player.has_method("heal_vision"):
 				player.heal_vision(heal_amount)
+				powerup_pickup.emit("heal")
 				print("Powerup: Healed player for ", heal_amount)
 
 		PowerupType.SPEED_BOOST:
 			if player.has_method("apply_speed_boost"):
 				player.apply_speed_boost(speed_multiplier, effect_duration)
+				powerup_pickup.emit("speed")
 				print("Powerup: Speed boost applied (", speed_multiplier, "x for ", effect_duration, "s)")
 
 		PowerupType.INVULNERABILITY:
 			if player.has_method("apply_invulnerability"):
 				player.apply_invulnerability(effect_duration)
+				powerup_pickup.emit("invul")
 				print("Powerup: Invulnerability applied for ", effect_duration, "s")
 
 func _setup_visual():
@@ -90,3 +96,23 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 			return result
 
 	return null
+
+func _on_pickup_overlay(type : String):
+	var canvas_layer = get_tree().get_first_node_in_group("canvas_layer")
+	if canvas_layer:
+		var rect = TextureRect.new()
+		rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		
+		match type:
+			"heal":
+				var heal_overlay = preload("res://assets/overlays/heal overlay.png")
+				rect.texture = heal_overlay
+				rect.modulate = Color.GREEN
+			"invul":
+				var shield_overlay = preload("res://assets/overlays/shield overlay.png")
+				rect.texture = shield_overlay
+				rect.modulate = Color.YELLOW
+		
+		canvas_layer.add_child(rect)
+		await get_tree().create_timer(0.5).timeout
+		rect.queue_free()

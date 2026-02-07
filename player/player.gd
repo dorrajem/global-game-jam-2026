@@ -76,7 +76,7 @@ func _physics_process(delta: float):
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		if global_position.y <= -64.0:
+		if global_position.y <= -.0:
 			player_died.emit()
 	else:
 		var floor_normal = get_floor_normal()

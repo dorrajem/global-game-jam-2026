@@ -11,6 +11,8 @@ static var instance: VFXManager
 @export var hit_particle_scene: PackedScene
 @export var powerup_collect_scene: PackedScene
 
+@export var canvas_layer : CanvasLayer
+
 func _ready():
 	instance = self
 	

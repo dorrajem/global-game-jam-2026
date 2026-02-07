@@ -23,7 +23,7 @@ func _ready() -> void:
 	var player : CharacterBody3D = get_tree().get_first_node_in_group("player")
 	if player:
 		player.vision_changed.connect(_on_vision_changed)
-	
+		
 	# initialize mask
 	_update_mask_positions(0.0)
 	print("UI Ready")
