@@ -3,9 +3,10 @@ shader_type spatial;
 render_mode blend_mix, cull_disabled, depth_prepass_alpha, specular_disabled, vertex_lighting;
 
 uniform sampler2D albedo_texture: source_color, filter_nearest;
+uniform vec2 texture_tile = vec2(1, 1);
 
 uniform bool snap_enabled = true;
-uniform float snap_resolution : hint_range(60.0, 288.0, 1.0) = 148.0;
+uniform float snap_resolution : hint_range(60.0, 480.0, 1.0) = 148.0;
 
 void vertex() {
 	vec4 view_space_pos = MODELVIEW_MATRIX * vec4(VERTEX, 1.0);

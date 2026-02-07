@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://dhf3edhtv3635" path="res://vfx/vfx_manager.gd" id="9_kek77"]
 [ext_resource type="Shader" uid="uid://dfb2djrkv8nna" path="res://shaders/ps1_post_processing.gdshader" id="16_2cqfq"]
 [ext_resource type="Shader" uid="uid://by1eyv8eldkf1" path="res://shaders/ps1_models.gdshader" id="16_yaehf"]
+[ext_resource type="Texture2D" uid="uid://bhsdwtfjpty82" path="res://assets/textures/damaged_concrete_floor_diff_4k.jpg" id="17_074og"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ycdy4"]
 sky_top_color = Color(0.23570955, 0, 0.07320034, 1)
@@ -63,14 +64,18 @@ frustum_focal_length = 100.0
 frustum_near = 1.0
 frustum_far = 256.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_074og"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yaehf"]
 render_priority = 0
 shader = ExtResource("16_yaehf")
+shader_parameter/albedo_texture = ExtResource("17_074og")
+shader_parameter/texture_tile = Vector2(1, 1)
 shader_parameter/snap_enabled = true
-shader_parameter/snap_resolution = 0.0
+shader_parameter/snap_resolution = 148.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
 shader = ExtResource("16_2cqfq")
+shader_parameter/viewport_size = Vector2(640, 480)
+shader_parameter/virtual_resolution = Vector2(320, 240)
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
@@ -130,7 +135,7 @@ obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6")])
 enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
 flying_enemy_scenes = Array[PackedScene]([ExtResource("7_2cqfq")])
 powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])
-terrain_material = SubResource("ShaderMaterial_074og")
+terrain_material = SubResource("ShaderMaterial_yaehf")
 metadata/_custom_type_script = "uid://e7ir03kjeff4"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=425460047]
