@@ -29,17 +29,25 @@ var dash_direction: Vector3 = Vector3.ZERO
 var is_invulnerable: bool = false
 var invulnerable_timer: float = 0.0
 
+# Powerup state
+var has_speed_boost: bool = false
+var speed_boost_timer: float = 0.0
+
 # References
 var current_target: Node3D = null
 
 signal vision_changed(new_vision: float, max_vision: float)
 signal player_died
 signal enemy_killed(enemy: Node3D)
+signal powerup_collected(powerup_type: String)
 
 func _ready():
 	# Initialize
 	current_vision = max_vision
 	vision_changed.emit(current_vision, max_vision)
+	
+	# Make sure player is in the player group
+	add_to_group("player")
 
 func _physics_process(delta: float):
 	# Update timers
@@ -55,6 +63,12 @@ func _physics_process(delta: float):
 		invulnerable_timer -= delta
 		if invulnerable_timer <= 0:
 			is_invulnerable = false
+			_end_invulnerability_visual()
+	
+	if speed_boost_timer > 0:
+		speed_boost_timer -= delta
+		if speed_boost_timer <= 0:
+			has_speed_boost = false
 	
 	# Regenerate vision slowly
 	if current_vision < max_vision and not is_dashing:
@@ -144,19 +158,131 @@ func take_damage(damage: float = 0.0):
 	if current_vision <= 0:
 		die()
 
+# ============================================
+# POWERUP METHODS
+# ============================================
+
 func heal_vision(amount: float):
 	current_vision = min(current_vision + amount, max_vision)
 	vision_changed.emit(current_vision, max_vision)
+	
+	print("🟢 HEAL: Vision restored +", amount, " (", current_vision, "/", max_vision, ")")
+	powerup_collected.emit("heal")
+	
+	# Optional: Visual feedback
+	_show_heal_visual()
+	#VFXManager.spawn_heal_effect(global_position)
 
 func apply_speed_boost(multiplier: float, duration: float):
-	var original_speed = forward_speed
+	# Store original speeds
+	var original_forward = forward_speed
+	var original_dash = dash_speed
+	var original_lateral = max_lateral_speed
+	
+	# Apply boost
 	forward_speed *= multiplier
+	dash_speed *= multiplier
+	max_lateral_speed *= multiplier
+	
+	# Set state
+	has_speed_boost = true
+	speed_boost_timer = duration
+	
+	print("🟡 SPEED BOOST: ", multiplier, "x speed for ", duration, " seconds!")
+	powerup_collected.emit("speed_boost")
+	
+	# Visual feedback
+	_show_speed_boost_visual()
+	#VFXManager.spawn_speed_trail(self)
+	
+	# Wait for duration
 	await get_tree().create_timer(duration).timeout
-	forward_speed = original_speed
+	
+	# Restore original speeds (only if no other boost is active)
+	if speed_boost_timer <= 0:
+		forward_speed = original_forward
+		dash_speed = original_dash
+		max_lateral_speed = original_lateral
+		has_speed_boost = false
+		
+		print("Speed boost ended")
+		_end_speed_boost_visual()
 
 func apply_invulnerability(duration: float):
 	is_invulnerable = true
 	invulnerable_timer = duration
+	
+	print("🔵 INVULNERABILITY: Protected for ", duration, " seconds!")
+	powerup_collected.emit("invulnerability")
+	
+	# Visual feedback
+	_show_invulnerability_visual()
+	#VFXManager.spawn_shield_effect(self)
+
+# ============================================
+# VISUAL FEEDBACK (Optional - implement based on your needs)
+# ============================================
+
+func _show_heal_visual():
+	# Flash green
+	if has_node("Collision/Body"):
+		var body = $Collision/Body
+		var original_color = body.get_surface_override_material(0).albedo_color if body.get_surface_override_material(0) else Color.WHITE
+		
+		# Create a quick green flash
+		var tween = create_tween()
+		var flash_mat = StandardMaterial3D.new()
+		flash_mat.albedo_color = Color.GREEN
+		flash_mat.emission_enabled = true
+		flash_mat.emission = Color.GREEN
+		flash_mat.emission_energy = 2.0
+		
+		body.set_surface_override_material(0, flash_mat)
+		
+		# Fade back
+		tween.tween_property(flash_mat, "emission_energy", 0.0, 0.5)
+		await tween.finished
+		body.set_surface_override_material(0, null)
+
+func _show_speed_boost_visual():
+	# Add yellow glow/trail
+	if has_node("Collision/Body"):
+		var body = $Collision/Body
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color.YELLOW
+		mat.emission_enabled = true
+		mat.emission = Color.YELLOW
+		mat.emission_energy = 1.0
+		body.set_surface_override_material(0, mat)
+
+func _end_speed_boost_visual():
+	# Remove glow
+	if has_node("Collision/Body"):
+		var body = $Collision/Body
+		body.set_surface_override_material(0, null)
+
+func _show_invulnerability_visual():
+	# Add blue shield effect
+	if has_node("Collision/Body"):
+		var body = $Collision/Body
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color.CYAN
+		mat.emission_enabled = true
+		mat.emission = Color.CYAN
+		mat.emission_energy = 1.5
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.albedo_color.a = 0.7
+		body.set_surface_override_material(0, mat)
+
+func _end_invulnerability_visual():
+	# Remove shield
+	if has_node("Collision/Body"):
+		var body = $Collision/Body
+		body.set_surface_override_material(0, null)
+
+# ============================================
+# OTHER METHODS
+# ============================================
 
 func die():
 	player_died.emit()

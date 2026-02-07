@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://deqya4pn8baft"]
+
+[ext_resource type="Script" uid="uid://c4olgmyh1l3t0" path="res://powerup/powerup.gd" id="1_56k2a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ntv8y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntv8y"]
+albedo_color = Color(0.8345892, 0.83409923, 7.70092e-07, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ntv8y"]
+material = SubResource("StandardMaterial3D_ntv8y")
+
+[node name="powerup" type="Area3D" unique_id=1981916170]
+script = ExtResource("1_56k2a")
+metadata/_custom_type_script = "uid://c4olgmyh1l3t0"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1506720001]
+shape = SubResource("SphereShape3D_ntv8y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1654891393]
+mesh = SubResource("SphereMesh_ntv8y")

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://e7ir03kjeff4" path="res://terrain_generation/terrain_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://vjfllgvprsx7" path="res://enemies/enemy.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://Player/Player.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://deqya4pn8baft" path="res://powerup/powerup.tscn" id="4_1bvp3"]
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
@@ -42,5 +41,4 @@ shadow_enabled = true
 script = ExtResource("1_ig7tw")
 max_height = 5.0
 enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
-powerup_scenes = Array[PackedScene]([ExtResource("4_1bvp3")])
 metadata/_custom_type_script = "uid://e7ir03kjeff4"
