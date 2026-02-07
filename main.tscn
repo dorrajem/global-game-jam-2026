@@ -2,23 +2,21 @@
 
 [ext_resource type="Script" uid="uid://e7ir03kjeff4" path="res://terrain_generation/terrain_generator.gd" id="1_ig7tw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-albedo_color = Color(0.9131146, 6.613165e-05, 0.69529974, 1)
-
 [node name="Main" type="Node3D" unique_id=46566031]
 
-[node name="TerrainGenerator" type="Node3D" parent="." unique_id=1850173487]
+[node name="TerrainGenerator" type="Node3D" parent="." unique_id=1212191561]
 script = ExtResource("1_ig7tw")
-terrain_material = SubResource("StandardMaterial3D_ig7tw")
 metadata/_custom_type_script = "uid://e7ir03kjeff4"
 
-[node name="Player (CharacterBody3D)s" type="Node" parent="." unique_id=2025292477]
+[node name="Player (CharacterBody3D)s" type="Node3D" parent="." unique_id=1930010276 groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
 [node name="Collision" type="Node" parent="Player (CharacterBody3D)s" unique_id=1803262382]
 
 [node name="Mesh" type="Node" parent="Player (CharacterBody3D)s" unique_id=695113165]
 
-[node name="Camera" type="Node" parent="Player (CharacterBody3D)s" unique_id=1178168501]
+[node name="Camera3D" type="Camera3D" parent="Player (CharacterBody3D)s" unique_id=258427171]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 3, -8)
 
 [node name="TargetingSystem (Node3D)s" type="Node" parent="." unique_id=1123812943]
 
@@ -27,7 +25,8 @@ metadata/_custom_type_script = "uid://e7ir03kjeff4"
 [node name="GameManager(Node)s" type="Node" parent="." unique_id=665914810]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1435141562]
-transform = Transform3D(0.70710677, 0.49999997, -0.49999997, 0, 0.70710677, 0.70710677, 0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
+transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, 0, 0, 0)
+shadow_enabled = true
 
 [node name="UI (CanvasLayer)s" type="Node" parent="." unique_id=1960411520]
 

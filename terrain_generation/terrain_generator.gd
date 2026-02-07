@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name TerrainGenerator
 extends Node3D
 
@@ -12,7 +12,7 @@ extends Node3D
 # height variation
 @export_group('Height Settings')
 @export var min_height : float = 0.0
-@export var max_height : float = 5.0
+@export var max_height : float = 32.0
 @export var height_smoothness : float = 0.3
 
 # obstacle settings
@@ -38,6 +38,14 @@ var player : Node3D = null
 var noise : FastNoiseLite
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
+class TerrainChunk:
+	var mesh_instance : MeshInstance3D
+	var collision_shape : CollisionShape3D
+	var static_body : StaticBody3D
+	var objects : Array[Node3D] = []
+	var chunk_index : int
+	var z_position : float
+
 func _ready() -> void:
 	# initialize noise for height variation
 	rng.randomize()
@@ -59,22 +67,22 @@ func _process(delta: float) -> void:
 		return
 	
 	# check if we need to spawn new chunks
-	var player_z = player.global_position.z
-	var furthest_chunk_z = current_chunk_index * chunk_length
+	var player_chunk_index = int(player.global_position.z / chunk_length)
+	#var furthest_chunk_z = current_chunk_index * chunk_length
 	
-	if player_z > furthest_chunk_z - (chunks_ahead * chunk_length):
+	if current_chunk_index < player_chunk_index + chunks_ahead:
 		_advance_chunks()
-
-func _advance_chunks():
+	
 	# remove old chunks
 	while active_chunks.size() > 0:
 		var oldest = active_chunks[0]
-		if oldest.z_position < (current_chunk_index - chunks_behind) * chunk_length:
+		if oldest.chunk_index < player_chunk_index - chunks_behind:
 			_recycle_chunk(oldest)
 			active_chunks.remove_at(0)
 		else:
 			break
-	
+
+func _advance_chunks():
 	# add new chunk ahead
 	current_chunk_index += 1
 	_create_chunk(current_chunk_index + chunks_ahead)
@@ -84,7 +92,7 @@ func _create_chunk(chunk_index : int):
 	
 	# try to reuse from pool
 	if chunk_pool.size() > 0:
-		chunk = chunk_pool.back()
+		chunk = chunk_pool.pop_back()
 		_reset_chunk(chunk)
 	else:
 		chunk = TerrainChunk.new()
@@ -112,8 +120,28 @@ func _initialize_chunk(chunk : TerrainChunk):
 	chunk.mesh_instance = MeshInstance3D.new()
 	chunk.static_body.add_child(chunk.mesh_instance)
 	
-	if terrain_material:
+	# DEBUG CUBE
+	var debug_cube = MeshInstance3D.new()
+	var cube_mesh = BoxMesh.new()
+	cube_mesh.size = Vector3(1, 10, 1)
+	debug_cube.mesh = cube_mesh
+	var red_mat = StandardMaterial3D.new()
+	red_mat.albedo_color = Color.RED
+	red_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	debug_cube.material_override = red_mat
+	chunk.static_body.add_child(debug_cube)
+	
+	if not terrain_material:
+		# create a default bright green material
+		var default_mat : StandardMaterial3D = StandardMaterial3D.new()
+		default_mat.albedo_color = Color(0.2, 0.8, 0.2)
+		default_mat.roughness = 1.0
+		chunk.mesh_instance.material_override = default_mat
+	else:
 		chunk.mesh_instance.material_override = terrain_material
+	
+	# cast shadows
+	chunk.mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	
 	# create collision shape
 	chunk.collision_shape = CollisionShape3D.new()
@@ -126,58 +154,85 @@ func _reset_chunk(chunk : TerrainChunk):
 			obj.queue_free()
 	chunk.objects.clear()
 
-func 	_generate_chunk_mesh(chunk : TerrainChunk):
-	var surface_tool = SurfaceTool.new()
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+func _generate_chunk_mesh(chunk : TerrainChunk):
+	var arrays : Array = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	
+	var verticies : PackedVector3Array = PackedVector3Array()
+	var normals : PackedVector3Array = PackedVector3Array()
+	var uvs : PackedVector2Array = PackedVector2Array()
+	var indices : PackedInt32Array = PackedInt32Array()
 	
 	# generate a simple plane with height variations
 	var segments_x : int = 10
 	var segments_z : int = 20
-	var segment_width : float = chunk_width / segments_x
-	var segment_length : float = chunk_length / segments_z
+	var segment_width : float = chunk_width / float(segments_x)
+	var segment_length : float = chunk_length / float(segments_z)
 	
 	# generate vertecies
 	for z : int in range(segments_z + 1):
 		for x : int in range(segments_x + 1):
-			var pos_x : float = (x * segment_width) - (chunk_width / 2.0)
-			var pos_z : float = (z * segment_length) - chunk.z_position
+			var pos_x : float = (float(x) * segment_width) - (chunk_width / 2.0)
+			var pos_z : float = float(z) * segment_length
 			
 			# use noise for height variations
-			var height = noise.get_noise_2d(pos_x * height_smoothness, pos_z * height_smoothness)
+			var world_x : float = pos_x
+			var world_z : float = chunk.z_position + pos_z
+			
+			var height = noise.get_noise_2d(world_x * height_smoothness, world_z * height_smoothness)
 			height = remap(height, -1.0, 1.0, min_height, max_height)
 			
 			var vertex = Vector3(pos_x, height, pos_z)
 			var uv = Vector2(float(x) / segments_x, float(z) / segments_z)
 			
-			surface_tool.set_uv(uv)
-			surface_tool.set_normal(Vector3.UP)
-			surface_tool.add_vertex(vertex)
+			# add vertex
+			verticies.append(Vector3(pos_x, height, pos_z))
+			normals.append(Vector3.UP)
+			uvs.append(Vector2(float(x) / float(segments_x), float(z) / float(segments_z)))
 	
 	# generate indices
 	for z : int in range(segments_z):
 		for x : int in range(segments_x):
-			var i = z * (segments_x + 1) + x
+			var top_left : int = z * (segments_x + 1) + x
+			var top_right : int = top_left + 1
+			var bottom_left : int = (z + 1) * (segments_x + 1) + x
+			var bottom_right : int = bottom_left + 1
 			
-			# first triangle
-			surface_tool.add_index(i)
-			surface_tool.add_index(i + segments_x + 1)
-			surface_tool.add_index(i + 1)
+			# first triangle (top-left, top_right, bottom_left)
+			indices.append(top_left)
+			indices.append(top_right)
+			indices.append(bottom_left)
+
+			# first triangle (top-right, bottom_right, bottom_left)
+			indices.append(top_right)
+			indices.append(bottom_right)
+			indices.append(bottom_left)
 			
-			# second triangle
-			surface_tool.add_index(i + 1)
-			surface_tool.add_index(i + segments_x + 1)
-			surface_tool.add_index(i + segments_x + 2)
-			
-	surface_tool.generate_normals()
+	#build the mesh
+	arrays[Mesh.ARRAY_VERTEX] = verticies
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_INDEX] = indices
 	
-	var mesh : ArrayMesh = surface_tool.commit()
-	chunk.mesh_instance.mesh = mesh
+	var array_mesh : ArrayMesh = ArrayMesh.new()
+	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	
-	# create collisions
+	chunk.mesh_instance.mesh = array_mesh
+	
+	# create collision shape
 	var shape : ConcavePolygonShape3D = ConcavePolygonShape3D.new()
-	shape.set_faces(mesh.get_faces())
+	var faces : PackedVector3Array = PackedVector3Array()
+	
+	# convert indices to face data for collision
+	for i : int in range(0, indices.size(), 3):
+		faces.append(verticies[indices[i]])
+		faces.append(verticies[indices[i + 1]])
+		faces.append(verticies[indices[i + 2]])
+		
+	shape.set_faces(faces)
 	chunk.collision_shape.shape = shape
 	
+	# position the chunk
 	chunk.static_body.global_position = Vector3(0, 0, chunk.z_position)
 
 func _spawn_obstacles(chunk : TerrainChunk):
