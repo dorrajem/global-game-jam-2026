@@ -3,12 +3,16 @@ extends CharacterBody3D
 
 # movement settings
 @export var move_speed : float = 3.0
-@export var detection_range : float = 15.0
+@export var detection_range : float = 10.0
 @export var attack_range : float = 2.0
 @export var wander_radius : float = 5.0
 
 # visual settings
 @export var target_highlight_color = Color(1.0, 0.0, 0.0, 0.5)
+
+
+
+
 
 # state
 enum State { IDLE, WANDER, CHASE, ATTACK }
@@ -21,9 +25,13 @@ var mesh_instance : MeshInstance3D = null
 var original_material : Material = null
 var is_targeted : bool = false
 
+# adding audio 
+@onready var audio_stream: AudioStreamPlayer3D = $AudioStreamPlayer3D
+
 func _ready() -> void:
 	spawn_position = global_position
 	add_to_group("enemy")
+	
 	
 	# find player
 	await get_tree().process_frame
@@ -33,6 +41,8 @@ func _ready() -> void:
 	mesh_instance = _find_mesh_instance(self)
 	if mesh_instance and mesh_instance.get_surface_override_material_count() > 0:
 		original_material = mesh_instance.get_surface_override_material(0)
+		
+	
 	
 	# connect to targeting system
 	var targeting_system : TargetingSystem = get_tree().get_first_node_in_group("targeting_system")
@@ -40,6 +50,8 @@ func _ready() -> void:
 		targeting_system.target_changed.connect(_on_target_change)
 	
 	_change_state(State.WANDER)
+	
+
 
 func _physics_process(delta: float) -> void:
 	state_timer -= delta
@@ -112,13 +124,24 @@ func _change_state(new_state : State):
 		State.IDLE:
 			state_timer = randf_range(1.0, 3.0)
 			velocity = Vector3.ZERO
+			audio_stream.play(0.1)
+			
 		
 		State.WANDER:
 			_set_new_wander_target()
 			state_timer = randf_range(3.0, 6.0)
+			audio_stream.play(0.10) 
+			
 		
 		State.CHASE:
-			pass
+			print(self.global_position)
+			if(global_position.x >=0): 
+				audio_stream.position.x = global_position.x + 5
+				print('left')
+			else:
+				audio_stream.position.x = global_position.x - 5
+				print('right')
+			audio_stream.play(0.10) 
 		
 		State.ATTACK:
 			state_timer = 1.0 # attack cooldown

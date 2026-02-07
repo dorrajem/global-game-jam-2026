@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://yf73o37w4kv7"]
 
-[ext_resource type="Script" uid="uid://cqfn4nqfcpbmf" path="res://player/player.gd" id="1_3qydi"]
-[ext_resource type="Script" uid="uid://cpcgytufl4ydx" path="res://player/follow_camera.gd" id="2_rkbax"]
+[ext_resource type="Script" uid="uid://cqfn4nqfcpbmf" path="res://Player/player.gd" id="1_3qydi"]
+[ext_resource type="Script" uid="uid://cpcgytufl4ydx" path="res://Player/follow_camera.gd" id="2_rkbax"]
+[ext_resource type="AudioStream" uid="uid://bq4r3imvhkj5g" path="res://assets/sfx/dash/dash 1.wav" id="3_ddoul"]
+[ext_resource type="AudioStream" uid="uid://dy50xhy1y7dl3" path="res://assets/sfx/dash/dash 2.wav" id="4_8g4oa"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_l2ndj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0rwas"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6ysni"]
+random_pitch = 1.122462
+streams_count = 2
+stream_0/stream = ExtResource("3_ddoul")
+stream_1/stream = ExtResource("4_8g4oa")
 
 [node name="Player" type="CharacterBody3D" unique_id=1286140647 groups=["player"]]
 script = ExtResource("1_3qydi")
@@ -17,9 +25,18 @@ mesh = SubResource("SphereMesh_l2ndj")
 shape = SubResource("SphereShape3D_0rwas")
 
 [node name="FollowCamera" type="Camera3D" parent="." unique_id=675787862 node_paths=PackedStringArray("target")]
+doppler_tracking = 2
+current = true
 script = ExtResource("2_rkbax")
 target = NodePath("..")
 follow_distance = 0.0
 follow_height = 0.5
 follow_smoothness = 10.0
 metadata/_custom_type_script = "uid://cpcgytufl4ydx"
+
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1629641511]
+doppler_tracking = 2
+current = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1484205268]
+stream = SubResource("AudioStreamRandomizer_6ysni")

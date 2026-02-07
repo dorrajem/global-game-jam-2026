@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://domntoyfymj5q"]
+
+[ext_resource type="AudioStream" uid="uid://g45an4d0jdlt" path="res://assets/soundtrack/bass.wav" id="1_ge54k"]
+[ext_resource type="AudioStream" uid="uid://bb1ymws1708n" path="res://assets/soundtrack/drums.wav" id="2_gax8x"]
+[ext_resource type="AudioStream" uid="uid://bdyehvy38fiuh" path="res://assets/soundtrack/piano.wav" id="3_reytd"]
+[ext_resource type="AudioStream" uid="uid://bv4dig8n3d2wt" path="res://assets/soundtrack/violin.wav" id="4_l5u10"]
+[ext_resource type="AudioStream" uid="uid://bsxilvxdfgn6x" path="res://assets/soundtrack/arpegiator.wav" id="5_3s6rc"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_26dgg"]
+stream_count = 5
+stream_0/stream = ExtResource("1_ge54k")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_gax8x")
+stream_1/volume = -60.0
+stream_2/stream = ExtResource("3_reytd")
+stream_2/volume = -60.0
+stream_3/stream = ExtResource("4_l5u10")
+stream_3/volume = 0.0
+stream_4/stream = ExtResource("5_3s6rc")
+stream_4/volume = -60.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=316385767]
+stream = SubResource("AudioStreamSynchronized_26dgg")
+autoplay = true
+bus = &"Soundtrack"

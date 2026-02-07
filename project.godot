@@ -15,6 +15,15 @@ run/main_scene="uid://bongv1ujfib42"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://d3uwfbn6xuyj1"
+general/3d_panning_strength=2.0
+
+[autoload]
+
+Soundtrack="*uid://domntoyfymj5q"
+
 [input]
 
 move_right={

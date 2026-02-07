@@ -31,6 +31,8 @@ var invulnerable_timer: float = 0.0
 
 # References
 var current_target: Node3D = null
+@onready var audio_stream = $AudioStreamPlayer2D
+
 
 signal vision_changed(new_vision: float, max_vision: float)
 signal player_died
@@ -72,6 +74,16 @@ func _physics_process(delta: float):
 		velocity.y -= gravity * delta
 	else:
 		velocity.y = -0.1  # Small downward force to keep grounded
+		
+	# soundtrack 
+	if current_vision >= 50:
+		Soundtrack.stream.set_sync_stream_volume(1,0)
+	if current_vision >= 70: 
+		Soundtrack.stream.set_sync_stream_volume(4,0)
+	if current_vision >= 80: 
+		Soundtrack.stream.set_sync_stream_volume(2,0)
+	
+	
 	
 	move_and_slide()
 
@@ -121,8 +133,13 @@ func try_dash(target: Node3D):
 		dash_cooldown_timer = dash_cooldown
 		current_target = target
 		
+		#dash audio
+		audio_stream.play()
+		
 		# Spawn dash VFX
 		VFXManager.spawn_dash_effect(global_position)
+		
+		
 		
 		return true
 	

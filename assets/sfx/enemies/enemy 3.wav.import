@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://eyqc1cg4nntc"
+path="res://.godot/imported/enemy 3.wav-819e1bd8729d06a317d831b7cff9283c.sample"
+
+[deps]
+
+source_file="res://assets/sfx/enemies/enemy 3.wav"
+dest_files=["res://.godot/imported/enemy 3.wav-819e1bd8729d06a317d831b7cff9283c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

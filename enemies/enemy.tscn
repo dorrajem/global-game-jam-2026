@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://vjfllgvprsx7"]
 
 [ext_resource type="Script" uid="uid://cr75ru314ehna" path="res://enemies/enemy.gd" id="1_7k104"]
+[ext_resource type="AudioStream" uid="uid://dapbhbyv6twwl" path="res://assets/sfx/enemies/enemy 1.wav" id="2_3t1x0"]
+[ext_resource type="AudioStream" uid="uid://cn4h8xcn7ry3x" path="res://assets/sfx/enemies/enemy 2.wav" id="3_epsnb"]
+[ext_resource type="AudioStream" uid="uid://eyqc1cg4nntc" path="res://assets/sfx/enemies/enemy 3.wav" id="4_4w5fm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
 
@@ -9,6 +12,15 @@ transparency = 1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7k104"]
 material = SubResource("StandardMaterial3D_fw1ev")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g67el"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("2_3t1x0")
+stream_1/stream = ExtResource("3_epsnb")
+stream_2/stream = ExtResource("4_4w5fm")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a6vjd"]
 
 [node name="Enemy" type="CharacterBody3D" unique_id=1752096227 groups=["enemy"]]
 script = ExtResource("1_7k104")
@@ -21,3 +33,17 @@ shape = SubResource("CapsuleShape3D_4gyqm")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1119516756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_7k104")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2135170033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+stream = SubResource("AudioStreamRandomizer_g67el")
+volume_db = 2.0
+unit_size = 100.0
+max_distance = 40.0
+panning_strength = 3.0
+bus = &"sfx"
+emission_angle_degrees = 75.6
+doppler_tracking = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AudioStreamPlayer3D" unique_id=1314511906]
+mesh = SubResource("CylinderMesh_a6vjd")
