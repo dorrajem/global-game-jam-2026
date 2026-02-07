@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://dv3uhpd8ik41k"]
+
+[ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://Player/Player.tscn" id="1_dc2kq"]
+
+[sub_resource type="Gradient" id="Gradient_iyuba"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6mnxl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ypt0w"]
+noise = SubResource("FastNoiseLite_6mnxl")
+color_ramp = SubResource("Gradient_iyuba")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyuba"]
+albedo_texture = SubResource("NoiseTexture2D_ypt0w")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dc2kq"]
+material = SubResource("StandardMaterial3D_iyuba")
+size = Vector2(200, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iyuba"]
+size = Vector3(200, 1, 200)
+
+[node name="TestingScene" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_dc2kq")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_iyuba")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.7071068, 0.5, -0.5, 0, 0.7071068, 0.7071068, 0.7071068, -0.5, 0.5, 0, 58.48449, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_dc2kq")]
