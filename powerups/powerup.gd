@@ -32,7 +32,7 @@ func _on_body_entered(body: Node3D):
 		_apply_effect(body)
 		# Optional: Add pickup sound/effect here
 		# AudioManager.play_sound("powerup_pickup")
-		# VFXManager.spawn_powerup_effect(global_position)
+		VFXManager.spawn_powerup_effect(global_position)
 		queue_free()
 
 func _apply_effect(player: Node3D):

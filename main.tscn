@@ -13,6 +13,16 @@
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
+[node name="Player" parent="." unique_id=1286140647 instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+
+[node name="TerrainGenerator" type="Node3D" parent="." unique_id=873277094]
+script = ExtResource("1_ig7tw")
+max_height = 5.0
+enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
+powerup_scenes = Array[PackedScene]([ExtResource("7_4c57u")])
+metadata/_custom_type_script = "uid://e7ir03kjeff4"
+
 [node name="TargetingSystem" parent="." unique_id=327083549 node_paths=PackedStringArray("player", "target_indicator") instance=ExtResource("4_lquwl")]
 player = NodePath("../Player")
 target_indicator = NodePath("TargetIndicator")
@@ -20,8 +30,15 @@ target_indicator = NodePath("TargetIndicator")
 [node name="TargetIndicator" parent="TargetingSystem" unique_id=1933398823 instance=ExtResource("2_7mycd")]
 visible = false
 
-[node name="Player" parent="." unique_id=1286140647 instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+[node name="GameManager" type="Node" parent="." unique_id=27361133 node_paths=PackedStringArray("player", "ui_layer")]
+script = ExtResource("7_272bh")
+player = NodePath("../Player")
+ui_layer = NodePath("../CanvasLayer")
+metadata/_custom_type_script = "uid://ecoo03mjjmyx"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=581647201]
+
+[node name="UI" parent="CanvasLayer" unique_id=265041677 instance=ExtResource("4_1bvp3")]
 
 [node name="DashTelegraph" type="Node3D" parent="." unique_id=1665449141 node_paths=PackedStringArray("player", "targeting_system")]
 script = ExtResource("8_5vw27")
@@ -32,23 +49,6 @@ metadata/_custom_type_script = "uid://cu46suqky75dn"
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1435141562]
 transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, 0, 0, 0)
 shadow_enabled = true
-
-[node name="TerrainGenerator" type="Node3D" parent="." unique_id=873277094]
-script = ExtResource("1_ig7tw")
-max_height = 5.0
-enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
-powerup_scenes = Array[PackedScene]([ExtResource("7_4c57u")])
-metadata/_custom_type_script = "uid://e7ir03kjeff4"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=581647201]
-
-[node name="UI" parent="CanvasLayer" unique_id=265041677 instance=ExtResource("4_1bvp3")]
-
-[node name="GameManager" type="Node" parent="." unique_id=27361133 node_paths=PackedStringArray("player", "ui_layer")]
-script = ExtResource("7_272bh")
-player = NodePath("../Player")
-ui_layer = NodePath("../CanvasLayer")
-metadata/_custom_type_script = "uid://ecoo03mjjmyx"
 
 [node name="VFXManager" type="Node3D" parent="." unique_id=2113399577]
 script = ExtResource("9_kek77")
