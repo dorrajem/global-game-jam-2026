@@ -109,12 +109,6 @@ func _physics_process(delta: float) -> void:
 
 		audio_stream.global_position.z = player.global_position.z 	
 		
-
-	
-	
-
-	
-	
 	move_and_slide()
 	
 func _cluster_management(cluster_range: float): 
@@ -189,6 +183,7 @@ func _change_state(new_state : State):
 			state_timer = randf_range(3.0, 6.0)
 			if is_leader:
 				audio_stream.play()
+				
 			
 			
 			

@@ -253,7 +253,7 @@ func die():
 	Soundtrack.stream.set_sync_stream_volume(6,-60)
 	player_died.emit()
 	# You can add death animation/effects here
-	set_physics_process(false)
+	#set_physics_process(false)
 	
 	
 
