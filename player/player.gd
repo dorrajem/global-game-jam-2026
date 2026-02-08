@@ -43,6 +43,8 @@ var current_target: Node3D = null
 @onready var hurt_audio = $hurtAudio
 @onready var death_audio = $deathAudio
 @onready var powerup_audio = $powerupAudio
+@onready var enemy_audio_bus = AudioServer.get_bus_index("enemy3D")
+@onready var soundtrack_audio_bus = AudioServer.get_bus_index("Soundtrack")
 
 
 
@@ -219,9 +221,9 @@ func take_damage(damage: float = 0.0):
 	if (damage == vision_loss_per_hit):
 		VFXManager.spawn_hit_effect(global_position)
 		VFXManager.screen_shake(0.3, 0.1)
+		#AUDIO 
+		hurt_audio.play()
 	
-	#AUDIO 
-	hurt_audio.play()
 	
 	# Check for death
 	if current_vision <= 0:
@@ -254,6 +256,13 @@ func die():
 	
 	is_dead = true
 	print("Player died!")
+	var tween = create_tween()
+	tween.tween_method(
+		func(vol): AudioServer.set_bus_volume_db(enemy_audio_bus, vol),
+		AudioServer.get_bus_volume_db(enemy_audio_bus),
+		-80.0,
+		2.0
+	)
 	death_audio.play()
 	Soundtrack.stream.set_sync_stream_volume(1,-60)
 	Soundtrack.stream.set_sync_stream_volume(2,-60)
