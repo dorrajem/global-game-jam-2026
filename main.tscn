@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://e7ir03kjeff4" path="res://terrain_generation/terrain_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://vjfllgvprsx7" path="res://enemies/enemy.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://player/targeting_system/target_indicator.tscn" id="2_7mycd"]
-[ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://player/player.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://Player/targeting_system/target_indicator.tscn" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://Player/Player.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://4kmisqnv5jaw" path="res://ui/vision_mask_ui/ui.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://player/targeting_system/targeting_system.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://Player/targeting_system/targeting_system.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://deqya4pn8baft" path="res://powerups/powerup.tscn" id="7_4c57u"]
 [ext_resource type="Script" uid="uid://ecoo03mjjmyx" path="res://game_manager/game_manager.gd" id="7_272bh"]
-[ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://player/dash_telegraph.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://Player/dash_telegraph.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://dhf3edhtv3635" path="res://vfx/vfx_manager.gd" id="9_kek77"]
 
 [node name="Main" type="Node3D" unique_id=46566031]

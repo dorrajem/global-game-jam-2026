@@ -35,13 +35,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_7k104")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2135170033]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
 stream = SubResource("AudioStreamRandomizer_g67el")
-unit_size = 100.0
+unit_size = 35.81
 max_distance = 40.0
-panning_strength = 3.0
 bus = &"enemy3D"
-emission_angle_enabled = true
 doppler_tracking = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AudioStreamPlayer3D" unique_id=1314511906]
