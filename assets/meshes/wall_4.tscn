@@ -14,10 +14,14 @@ shader_parameter/snap_enabled = true
 shader_parameter/snap_resolution = 148.0
 shader_parameter/affine_weight = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bjml"]
-resource_name = "BrickSmallBrown"
-cull_mode = 2
-albedo_texture = ExtResource("3_w67xc")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w67xc"]
+render_priority = 0
+shader = ExtResource("2_i16rc")
+shader_parameter/albedo_texture = ExtResource("3_w67xc")
+shader_parameter/texture_tile = Vector2(1, 1)
+shader_parameter/snap_enabled = true
+shader_parameter/snap_resolution = 148.0
+shader_parameter/affine_weight = 0.1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1fyqh"]
 _surfaces = [{
@@ -65,7 +69,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 114,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAALAAoADQAOAA8AEAARABIAEwAUABUAFgAVABQAFwAYABkAGgAbABwAHQAeAB8AIAAhACIAIwAkACUAJgAnACgAKQAqACsALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANQA3ADYANgA4ADQANgA5ADgAOQA6ADgAOwA6ADkAOgA8ADgAPAA9ADgAPgA8ADoAPwBAAEEAQQBCAD8AQQBDAEIAQwBEAEIAQwBFAEQARQBGAEQAQwBHAEUARwBIAEUAQwBJAEcA"),
-"material": SubResource("StandardMaterial3D_6bjml"),
+"material": SubResource("ShaderMaterial_w67xc"),
 "name": "BrickSmallBrown",
 "primitive": 3,
 "uv_scale": Vector4(4.144395, 2.4103115, 0, 0),
@@ -78,4 +82,5 @@ shadow_mesh = SubResource("ArrayMesh_1fyqh")
 [node name="Wall4" unique_id=1141978353 instance=ExtResource("1_vsuwh")]
 
 [node name="Wall_4" parent="." index="0" unique_id=394890869]
+transform = Transform3D(1, 0, 0, 0, -3.5762787e-07, 0.99999994, 0, -0.99999994, -3.5762787e-07, 451.85577, 116.37523, -688.63776)
 mesh = SubResource("ArrayMesh_ye8b8")

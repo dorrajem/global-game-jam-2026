@@ -129,6 +129,7 @@ func _initialize_chunk(chunk: TerrainChunk):
 		chunk.mesh_instance.material_override = terrain_material
 	
 	chunk.mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+	chunk.mesh_instance.gi_mode = GeometryInstance3D.GI_MODE_DYNAMIC
 	
 	chunk.collision_shape = CollisionShape3D.new()
 	chunk.static_body.add_child(chunk.collision_shape)

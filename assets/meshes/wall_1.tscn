@@ -14,10 +14,14 @@ shader_parameter/snap_enabled = true
 shader_parameter/snap_resolution = 148.0
 shader_parameter/affine_weight = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vkob"]
-resource_name = "Concrete"
-cull_mode = 2
-albedo_texture = ExtResource("4_i1u7f")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_op6fb"]
+render_priority = 0
+shader = ExtResource("2_op6fb")
+shader_parameter/albedo_texture = ExtResource("4_i1u7f")
+shader_parameter/texture_tile = Vector2(1, 1)
+shader_parameter/snap_enabled = true
+shader_parameter/snap_resolution = 148.0
+shader_parameter/affine_weight = 0.1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_w6rsw"]
 _surfaces = [{
@@ -65,7 +69,7 @@ _surfaces = [{
 "index_count": 198,
 "index_data": PackedByteArray("FAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEAZABlAGYAZABnAGUAaABpAGoAaABrAGkAbABtAG4AbABvAG0AcABxAHIAcABzAHEAdAB1AHYAdAB3AHUAeAB5AHoAeAB7AHkAfAB9AH4AfAB/AH0AgACBAIIAgACDAIEAAAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEA"),
 "lods": [162.21071, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEA")],
-"material": SubResource("StandardMaterial3D_0vkob"),
+"material": SubResource("ShaderMaterial_op6fb"),
 "name": "Concrete",
 "primitive": 3,
 "uv_scale": Vector4(2, 2.0058434, 0, 0),

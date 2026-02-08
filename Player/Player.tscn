@@ -13,6 +13,7 @@ radius = 0.4
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_3qydi")
+max_lateral_speed = 20.0
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1656571471]
 mesh = SubResource("SphereMesh_l2ndj")

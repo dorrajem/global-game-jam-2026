@@ -14,10 +14,14 @@ shader_parameter/snap_enabled = true
 shader_parameter/snap_resolution = 148.0
 shader_parameter/affine_weight = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmeou"]
-resource_name = "BrickSmallBrown"
-cull_mode = 2
-albedo_texture = ExtResource("3_25r1q")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25r1q"]
+render_priority = 0
+shader = ExtResource("2_hp4a8")
+shader_parameter/albedo_texture = ExtResource("3_25r1q")
+shader_parameter/texture_tile = Vector2(1, 1)
+shader_parameter/snap_enabled = true
+shader_parameter/snap_resolution = 148.0
+shader_parameter/affine_weight = 0.1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_u63lw"]
 _surfaces = [{
@@ -63,7 +67,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 252,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUwBQAFIAUwBSAFQAVABVAFMAUwBWAFAAVgBXAFAAUwBYAFYAWQBaAFsAXABbAFoAWgBdAFwAXQBeAFwAWwBfAFkAWwBgAF8AYQBiAGAAYABiAF8AYgBjAF8AYwBkAF8AZABlAF8AZgBfAGUAZgBlAGcAaABmAGcAZwBpAGgAagBrAGwAbABtAGoAbQBuAGoAbgBvAGoAbwBwAGoAcABxAGoAcgBwAG8AcwB0AHUAdQB2AHMAdQB3AHYAeAB1AHQAdAB5AHgAeQB6AHgAewB6AHwAeQB8AHoAeQB9AHwAeQB+AH0AeQB/AH4AeQCAAH8AgQB/AIAAggCBAIAAgACDAIIA"),
-"material": SubResource("StandardMaterial3D_rmeou"),
+"material": SubResource("ShaderMaterial_25r1q"),
 "name": "BrickSmallBrown",
 "primitive": 3,
 "uv_scale": Vector4(4.144395, 2.4103115, 0, 0),

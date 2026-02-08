@@ -1,8 +1,44 @@
 [gd_scene format=3 uid="uid://cjoqohheytils"]
 
 [ext_resource type="Script" uid="uid://1f27jdylkx2u" path="res://main_menu/main_menu.gd" id="1_3shxk"]
-[ext_resource type="Texture2D" uid="uid://b5i7nydk4xb01" path="res://icon.svg" id="1_oa53l"]
+[ext_resource type="Texture2D" uid="uid://cyniasqixu3al" path="res://main_menu/kamen main menu.png" id="2_3shxk"]
 [ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="2_d3a7t"]
+[ext_resource type="Shader" uid="uid://jbin206xltul" path="res://shaders/crt_shader.gdshader" id="5_6tl50"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bws42"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6tl50"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t6bnd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ia84y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3f7m4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6at21"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_og6xe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mvfl2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvn4f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bws42"]
+shader = ExtResource("5_6tl50")
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/scan_line_amount = 0.50000002375
+shader_parameter/warp_amount = 0.30000001425
+shader_parameter/noise_amount = 0.050000002375
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 1.0
+shader_parameter/roll_line_amount = 0.50000002375
+shader_parameter/roll_speed = 0.5000004037500005
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
 
 [node name="MainMenu" type="Control" unique_id=792542029]
 layout_mode = 3
@@ -13,14 +49,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3shxk")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=572788553]
+[node name="Background" type="TextureRect" parent="." unique_id=469428241]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.38779965, 0.36578286, 0.3067203, 1)
+texture = ExtResource("2_3shxk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=188255922]
 layout_mode = 1
@@ -35,11 +71,6 @@ alignment = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=443572542]
-layout_mode = 2
-texture = ExtResource("1_oa53l")
-stretch_mode = 3
-
 [node name="Control4" type="Control" parent="VBoxContainer" unique_id=913997445]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
@@ -48,8 +79,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(0.43137255, 0, 0.24705882, 1)
+theme_override_colors/font_hover_color = Color(0.8, 0, 0.1882353, 1)
 theme_override_fonts/font = ExtResource("2_d3a7t")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 72
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bws42")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6tl50")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t6bnd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ia84y")
 text = "Start Run"
 
 [node name="Control3" type="Control" parent="VBoxContainer" unique_id=1214254179]
@@ -60,13 +98,33 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(0.43137255, 0, 0.24705882, 1)
+theme_override_colors/font_hover_color = Color(0.8, 0, 0.1882353, 1)
 theme_override_fonts/font = ExtResource("2_d3a7t")
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3f7m4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6at21")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_og6xe")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mvfl2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qvn4f")
 text = "Quit Game"
 
 [node name="Control" type="Control" parent="VBoxContainer" unique_id=953218588]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=932803423]
+
+[node name="CRTFilter" type="ColorRect" parent="CanvasLayer2" unique_id=1650685136]
+modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("ShaderMaterial_bws42")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

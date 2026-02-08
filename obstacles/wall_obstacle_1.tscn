@@ -5,9 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://ds86wjfgk2jt2" path="res://assets/meshes/wall_4.tscn" id="5_bgfay"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_28r6e"]
-size = Vector3(704.5151, 215.28662, 26.998425)
+size = Vector3(495.37744, 237.89313, 26.998425)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xsd4h"]
+size = Vector3(73.57236, 165.06671, 29.966309)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ldfxm"]
+size = Vector3(111.009544, 67.49722, 29.966309)
 
 [node name="WallObstacle1" type="StaticBody3D" unique_id=1648039833]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_xsd4h")
 rotate_speed = 0.0
 bob_height = 0.0
@@ -15,11 +24,19 @@ bob_speed = 0.0
 metadata/_custom_type_script = "uid://owx1vxfbywjq"
 
 [node name="Wall1" parent="." unique_id=1488979940 instance=ExtResource("2_ldfxm")]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 15.6, 0, 14)
+transform = Transform3D(-8.7422775e-10, 0, 0.02, 0, 0.02, 0, -0.02, 0, -8.7422775e-10, 14.860281, 0, -5.2016435)
 
 [node name="Wall4" parent="." unique_id=1141978353 instance=ExtResource("5_bgfay")]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -3.2765808, 0, 14)
+transform = Transform3D(-8.7422775e-10, 0, 0.02, 0, 0.02, 0, -0.02, 0, -8.7422775e-10, 14.507059, 0.4198389, 14.29936)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=250649369]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 1.1729953, 2.7826526, 0.37566683)
+transform = Transform3D(-8.7422775e-10, 0, 0.02, 0, 0.02, 0, -0.02, 0, -8.7422775e-10, 0.7485409, 2.5184405, 10.441579)
 shape = SubResource("BoxShape3D_28r6e")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=378140462]
+transform = Transform3D(-8.7422775e-10, 0, 0.02, 0, 0.02, 0, -0.02, 0, -8.7422775e-10, 0.7262411, 1.8003392, 4.770016)
+shape = SubResource("BoxShape3D_xsd4h")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1901798503]
+transform = Transform3D(-8.7422775e-10, 0, 0.02, 0, 0.02, 0, -0.02, 0, -8.7422775e-10, 0.7262411, 0.8246444, 2.9576392)
+shape = SubResource("BoxShape3D_ldfxm")
