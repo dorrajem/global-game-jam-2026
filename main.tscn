@@ -2,19 +2,18 @@
 
 [ext_resource type="Script" uid="uid://e7ir03kjeff4" path="res://terrain_generation/terrain_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://vjfllgvprsx7" path="res://enemies/enemy.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://player/targeting_system/target_indicator.tscn" id="2_7mycd"]
-[ext_resource type="Script" uid="uid://cpcgytufl4ydx" path="res://player/follow_camera.gd" id="2_w48qg"]
+[ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://Player/targeting_system/target_indicator.tscn" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://cpcgytufl4ydx" path="res://Player/follow_camera.gd" id="2_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bgbaeu4qkgppe" path="res://obstacles/obstacle_sone.tscn" id="3_efxa6"]
-[ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://player/player.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://Player/Player.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://4kmisqnv5jaw" path="res://ui/vision_mask_ui/ui.tscn" id="4_1bvp3"]
 [ext_resource type="Shader" uid="uid://bgkg54q6hjrhw" path="res://shaders/ps1_post_postprocessing_2.gdshader" id="4_d13ii"]
 [ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://player/targeting_system/targeting_system.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c1xnytwvc7tdh" path="res://powerups/powerup_heal.tscn" id="5_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://crjnbch7f34vc" path="res://powerups/powerup_speed.tscn" id="6_w48qg"]
-[ext_resource type="PackedScene" uid="uid://dknro6n11r6b4" path="res://enemies/flying_enemy.tscn" id="7_2cqfq"]
 [ext_resource type="Script" uid="uid://ecoo03mjjmyx" path="res://game_manager/game_manager.gd" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://diw7ysi1ymirj" path="res://powerups/powerup_invulnerability.tscn" id="7_vivmo"]
-[ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://player/dash_telegraph.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://Player/dash_telegraph.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://dhf3edhtv3635" path="res://vfx/vfx_manager.gd" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://bfpcg1htahdx0" path="res://assets/meshes/fence/fence_1.tscn" id="11_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://b0kpsbyily1c1" path="res://obstacles/tree_1_obstacle.tscn" id="11_cegan"]
@@ -224,7 +223,6 @@ fence_spacing = 3.0
 obstacles_per_chunk = 10
 obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6"), ExtResource("11_cegan"), ExtResource("12_82xsv"), ExtResource("13_getpj")])
 enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
-flying_enemy_scenes = Array[PackedScene]([ExtResource("7_2cqfq")])
 powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])
 terrain_material = SubResource("ShaderMaterial_yaehf")
 metadata/_custom_type_script = "uid://e7ir03kjeff4"

@@ -38,6 +38,14 @@ var is_dead : bool = false
 # References
 var current_target: Node3D = null
 
+#audio players
+@onready var dash_audio = $dashAudio
+@onready var hurt_audio = $hurtAudio
+@onready var death_audio = $deathAudio
+@onready var powerup_audio = $powerupAudio
+
+
+
 signal vision_changed(new_vision: float, max_vision: float)
 signal player_died
 signal enemy_killed(enemy: Node3D)
@@ -92,6 +100,21 @@ func _physics_process(delta: float):
 		else:
 			slope_velocity_bonus = 0.0
 		velocity.y = -0.5  # Small downward force to keep grounded
+		
+	# soundtrack 
+	if current_vision <30: 
+		Soundtrack.stream.set_sync_stream_volume(5,0)
+		Soundtrack.stream.set_sync_stream_volume(6,0)
+	if current_vision <50: 
+		Soundtrack.stream.set_sync_stream_volume(5,-60)
+		Soundtrack.stream.set_sync_stream_volume(6,-60)
+		Soundtrack.stream.set_sync_stream_volume(4,0)
+	if current_vision <70: 
+		Soundtrack.stream.set_sync_stream_volume(1,0)
+	else:
+		Soundtrack.stream.set_sync_stream_volume(2,0)
+	
+	
 	
 	move_and_slide()
 	_check_collisions()
@@ -149,8 +172,13 @@ func try_dash(target: Node3D):
 		dash_cooldown_timer = dash_cooldown
 		current_target = target
 		
+		#dash audio
+		dash_audio.play()
+		
 		# Spawn dash VFX
 		VFXManager.spawn_dash_effect(global_position)
+		
+		
 		
 		return true
 	
@@ -192,16 +220,21 @@ func take_damage(damage: float = 0.0):
 		VFXManager.spawn_hit_effect(global_position)
 		VFXManager.screen_shake(0.3, 0.1)
 	
+	#AUDIO 
+	hurt_audio.play()
+	
 	# Check for death
 	if current_vision <= 0:
 		die()
 
 func heal_vision(amount: float):
+	powerup_audio.play()
 	current_vision = min(current_vision + amount, max_vision)
 	vision_changed.emit(current_vision, max_vision)
 	print("Vision healed! Current: ", current_vision, "/", max_vision)
 
 func apply_speed_boost(multiplier: float, duration: float):
+	powerup_audio.play()
 	var original_speed = forward_speed
 	forward_speed *= multiplier
 	print("Speed boost active! ", forward_speed, " for ", duration, "s")
@@ -210,6 +243,7 @@ func apply_speed_boost(multiplier: float, duration: float):
 	print("Speed boost ended")
 
 func apply_invulnerability(duration: float):
+	powerup_audio.play()
 	is_invulnerable = true
 	invulnerable_timer = duration
 	print("Invulnerability active for ", duration, "s")
@@ -220,6 +254,12 @@ func die():
 	
 	is_dead = true
 	print("Player died!")
+	death_audio.play()
+	Soundtrack.stream.set_sync_stream_volume(1,-60)
+	Soundtrack.stream.set_sync_stream_volume(2,-60)
+	Soundtrack.stream.set_sync_stream_volume(4,-60)
+	Soundtrack.stream.set_sync_stream_volume(5,-60)
+	Soundtrack.stream.set_sync_stream_volume(6,-60)
 	player_died.emit()
 	# Don't disable physics - let GameManager handle restart
 	velocity = Vector3.ZERO

@@ -3,12 +3,16 @@ extends CharacterBody3D
 
 # movement settings
 @export var move_speed : float = 3.0
-@export var detection_range : float = 15.0
+@export var detection_range : float = 5
 @export var attack_range : float = 2.0
 @export var wander_radius : float = 5.0
 
 # visual settings
 @export var target_highlight_color = Color(1.0, 0.0, 0.0, 0.5)
+
+
+
+
 
 # state
 enum State { IDLE, WANDER, CHASE, ATTACK }
@@ -21,8 +25,21 @@ var mesh_instance : MeshInstance3D = null
 var original_material : Material = null
 var is_targeted : bool = false
 
+#3D audio 
+var max_hearing_dist = 30
+var min_vol = -60
+var max_vol = 0 
+
+
+# adding audio 
+@onready var audio_stream: AudioStreamPlayer3D = $AudioStreamPlayer3D
+var cluster_range:float = 5
+var group_center_position : Vector3
+var is_leader:bool 
+
 func _ready() -> void:
 	spawn_position = global_position
+	
 	
 	# find player
 	await get_tree().process_frame
@@ -32,6 +49,8 @@ func _ready() -> void:
 	mesh_instance = _find_mesh_instance(self)
 	if mesh_instance and mesh_instance.get_surface_override_material_count() > 0:
 		original_material = mesh_instance.get_surface_override_material(0)
+		
+	
 	
 	# connect to targeting system
 	var targeting_system : TargetingSystem = get_tree().get_first_node_in_group("targeting_system")
@@ -39,6 +58,11 @@ func _ready() -> void:
 		targeting_system.target_changed.connect(_on_target_change)
 	
 	_change_state(State.WANDER)
+	
+	
+	
+	
+
 
 func _physics_process(delta: float) -> void:
 	state_timer -= delta
@@ -47,6 +71,8 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var distance_to_player = global_position.distance_to(player.global_position)
+	
+	
 	
 	# state machine
 	match current_state:
@@ -70,9 +96,44 @@ func _physics_process(delta: float) -> void:
 			_attack_player()
 			if distance_to_player > attack_range * 1.2:
 				_change_state(State.CHASE)
-	
-	move_and_slide()
+				
+	is_leader = _cluster_management(cluster_range)
+	if is_leader: 
+		var hearing_distance = global_position.distance_to(player.global_position)
+		var x_difference = global_position.x - player.global_position.x
+		
+		if(x_difference > 0):
+			audio_stream.global_position.x = global_position.x - 5
+		else:
+			audio_stream.global_position.x = global_position.x + 5
 
+		audio_stream.global_position.z = player.global_position.z 	
+		
+	move_and_slide()
+	
+func _cluster_management(cluster_range: float): 
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	var cluster_enemies = []
+	for enemy in enemies: 
+		if not enemy is Node3D:
+			continue
+		var distance = enemy.global_position.distance_to(global_position)
+		if distance < cluster_range:
+			cluster_enemies.append(enemy)
+
+	var leader = cluster_enemies[0]
+	var distance= cluster_enemies[0].global_position.distance_to(player.global_position)
+	for enemy in cluster_enemies:
+		var calculated_distance = enemy.global_position.distance_to(player.global_position)
+		if calculated_distance < distance: 
+			distance = calculated_distance
+			leader = enemy
+
+	return leader == self
+
+	
+
+	
 func _find_mesh_instance(node : Node):
 	if node is MeshInstance3D:
 		return node
@@ -111,13 +172,25 @@ func _change_state(new_state : State):
 		State.IDLE:
 			state_timer = randf_range(1.0, 3.0)
 			velocity = Vector3.ZERO
+
+			
+			
+			
+			
 		
 		State.WANDER:
 			_set_new_wander_target()
 			state_timer = randf_range(3.0, 6.0)
+			if is_leader:
+				audio_stream.play()
+				
+			
+			
+			
 		
 		State.CHASE:
 			pass
+
 		
 		State.ATTACK:
 			state_timer = 1.0 # attack cooldown

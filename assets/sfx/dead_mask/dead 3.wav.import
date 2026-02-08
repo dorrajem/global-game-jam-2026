@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dy1ah0r0dx4d4"
+path="res://.godot/imported/dead 3.wav-2cc44d1e98259016d7afa2cb7fe648d5.sample"
+
+[deps]
+
+source_file="res://assets/sfx/dead_mask/dead 3.wav"
+dest_files=["res://.godot/imported/dead 3.wav-2cc44d1e98259016d7afa2cb7fe648d5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
