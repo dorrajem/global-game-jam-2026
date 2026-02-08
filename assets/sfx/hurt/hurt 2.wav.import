@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c80hhgpu8r56r"
+path="res://.godot/imported/hurt 2.wav-3858aaa51a92deab0272227c98af009d.sample"
+
+[deps]
+
+source_file="res://assets/sfx/hurt/hurt 2.wav"
+dest_files=["res://.godot/imported/hurt 2.wav-3858aaa51a92deab0272227c98af009d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

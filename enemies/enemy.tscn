@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://vjfllgvprsx7"]
 
 [ext_resource type="Script" uid="uid://cr75ru314ehna" path="res://enemies/enemy.gd" id="1_7k104"]
+[ext_resource type="AudioStream" uid="uid://dapbhbyv6twwl" path="res://assets/sfx/enemies/enemy 1.wav" id="2_3t1x0"]
+[ext_resource type="AudioStream" uid="uid://cn4h8xcn7ry3x" path="res://assets/sfx/enemies/enemy 2.wav" id="3_epsnb"]
+[ext_resource type="AudioStream" uid="uid://eyqc1cg4nntc" path="res://assets/sfx/enemies/enemy 3.wav" id="4_4w5fm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
 radius = 0.4
@@ -18,8 +21,18 @@ radius = 0.4
 radial_segments = 4
 rings = 1
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1752096227]
+
 collision_mask = 3
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g67el"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("2_3t1x0")
+stream_1/stream = ExtResource("3_epsnb")
+stream_2/stream = ExtResource("4_4w5fm")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a6vjd"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1752096227 groups=["enemy"]]
 script = ExtResource("1_7k104")
 metadata/_custom_type_script = "uid://cr75ru314ehna"
 
@@ -34,3 +47,13 @@ mesh = SubResource("CapsuleMesh_7k104")
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=277905693]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2135170033]
+stream = SubResource("AudioStreamRandomizer_g67el")
+unit_size = 35.81
+max_distance = 40.0
+bus = &"enemy3D"
+doppler_tracking = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AudioStreamPlayer3D" unique_id=1314511906]
+visible = false
+mesh = SubResource("CylinderMesh_a6vjd")

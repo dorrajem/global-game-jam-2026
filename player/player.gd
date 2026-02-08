@@ -37,6 +37,13 @@ var slope_velocity_bonus : float = 0.0
 # References
 var current_target: Node3D = null
 
+#audio players
+@onready var dash_audio = $dashAudio
+@onready var hurt_audio = $hurtAudio
+@onready var death_audio = $deathAudio
+
+
+
 signal vision_changed(new_vision: float, max_vision: float)
 signal player_died
 signal enemy_killed(enemy: Node3D)
@@ -88,6 +95,16 @@ func _physics_process(delta: float):
 		else:
 			slope_velocity_bonus = 0.0
 		velocity.y = -0.5  # Small downward force to keep grounded
+		
+	# soundtrack 
+	if current_vision >= 50:
+		Soundtrack.stream.set_sync_stream_volume(1,0)
+	if current_vision >= 70: 
+		Soundtrack.stream.set_sync_stream_volume(4,0)
+	if current_vision >= 80: 
+		Soundtrack.stream.set_sync_stream_volume(2,0)
+	
+	
 	
 	move_and_slide()
 	_check_collisions()
@@ -145,8 +162,13 @@ func try_dash(target: Node3D):
 		dash_cooldown_timer = dash_cooldown
 		current_target = target
 		
+		#dash audio
+		dash_audio.play()
+		
 		# Spawn dash VFX
 		VFXManager.spawn_dash_effect(global_position)
+		
+		
 		
 		return true
 	
@@ -187,6 +209,9 @@ func take_damage(damage: float = 0.0):
 	VFXManager.spawn_hit_effect(global_position)
 	VFXManager.screen_shake(0.3, 0.1)
 	
+	#AUDIO 
+	hurt_audio.play()
+	
 	# Check for death
 	if current_vision <= 0:
 		die()
@@ -214,6 +239,8 @@ func die():
 	player_died.emit()
 	# You can add death animation/effects here
 	set_physics_process(false)
+	death_audio.play()
+	
 
 func _on_hit_box_body_entered(body: Node3D) -> void:
 	_handle_collision_with(body)
