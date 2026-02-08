@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cql2m5d2107rm"]
+
+[ext_resource type="Script" uid="uid://owx1vxfbywjq" path="res://obstacles/obstacle.gd" id="1_cuynj"]
+[ext_resource type="PackedScene" uid="uid://b3ygqebk2ppv6" path="res://assets/meshes/tree_3.tscn" id="2_3k7dr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3k7dr"]
+radius = 0.18164063
+height = 1.2001953
+
+[node name="Tree3Obstacle" type="StaticBody3D" unique_id=42199698]
+script = ExtResource("1_cuynj")
+rotate_speed = 0.0
+bob_height = 0.0
+bob_speed = 0.0
+metadata/_custom_type_script = "uid://owx1vxfbywjq"
+
+[node name="Tree3" parent="." unique_id=1310896114 instance=ExtResource("2_3k7dr")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -4.075281, 0, -4.184685)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=123291498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6150954, 0)
+shape = SubResource("CapsuleShape3D_3k7dr")

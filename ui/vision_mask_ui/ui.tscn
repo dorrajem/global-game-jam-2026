@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://u7fsqke5nhsp" path="res://assets/overlays/heal overlay.png" id="2_17bum"]
 [ext_resource type="LabelSettings" uid="uid://cj1w0na2joqw7" path="res://ui/fonts/score_label_settings.tres" id="2_l2pe0"]
 [ext_resource type="LabelSettings" uid="uid://h1uve2q6y80" path="res://ui/fonts/game_over_label_settings.tres" id="3_6ke2l"]
+[ext_resource type="Texture2D" uid="uid://wohhmx0r4r8n" path="res://assets/mask/oni_mask_upper.png" id="3_jn1nt"]
+[ext_resource type="Texture2D" uid="uid://d0bldgxv5h1a4" path="res://assets/mask/oni_mask_lower.png" id="4_ab6tg"]
 [ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="4_qailb"]
 
 [node name="UI" type="Control" unique_id=1125060952]
@@ -27,14 +29,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_17bum")
 
-[node name="TopMask" type="ColorRect" parent="." unique_id=701927039]
+[node name="TopMask" type="TextureRect" parent="." unique_id=1007334798]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 grow_horizontal = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("3_jn1nt")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="BottomMask" type="ColorRect" parent="." unique_id=2013168182]
+[node name="BottomMask" type="TextureRect" parent="." unique_id=60541127]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -43,7 +47,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 rotation = 3.1415927
 pivot_offset_ratio = Vector2(0.5, 0)
-color = Color(0, 0, 0, 1)
+texture = ExtResource("4_ab6tg")
+expand_mode = 1
+stretch_mode = 6
+flip_v = true
 
 [node name="ScoreLabel" type="Label" parent="." unique_id=457374581]
 layout_mode = 0
@@ -67,6 +74,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="GameOverPanel" type="Panel" parent="." unique_id=982191135]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

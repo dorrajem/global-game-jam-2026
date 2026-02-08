@@ -15,6 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://diw7ysi1ymirj" path="res://powerups/powerup_invulnerability.tscn" id="7_vivmo"]
 [ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://player/dash_telegraph.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://dhf3edhtv3635" path="res://vfx/vfx_manager.gd" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://b0kpsbyily1c1" path="res://obstacles/tree_1_obstacle.tscn" id="11_cegan"]
+[ext_resource type="PackedScene" uid="uid://b55qxb1ti3jh2" path="res://obstacles/tree_2_obstacle.tscn" id="12_82xsv"]
+[ext_resource type="PackedScene" uid="uid://cql2m5d2107rm" path="res://obstacles/tree_3_obstacle.tscn" id="13_getpj"]
+[ext_resource type="PackedScene" uid="uid://c0t4g4a53l54v" path="res://obstacles/wall_obstacle_1.tscn" id="14_ryguw"]
 [ext_resource type="Shader" uid="uid://dfb2djrkv8nna" path="res://shaders/ps1_post_processing.gdshader" id="16_2cqfq"]
 [ext_resource type="Shader" uid="uid://by1eyv8eldkf1" path="res://shaders/ps1_models.gdshader" id="16_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bhsdwtfjpty82" path="res://assets/textures/damaged_concrete_floor_diff_4k.jpg" id="17_074og"]
@@ -136,7 +140,8 @@ metadata/_custom_type_script = "uid://dhf3edhtv3635"
 [node name="TerrainGenerator" type="Node3D" parent="." unique_id=2020132531]
 script = ExtResource("1_ig7tw")
 chunk_width = 35.5
-obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6")])
+obstacles_per_chunk = 10
+obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6"), ExtResource("11_cegan"), ExtResource("12_82xsv"), ExtResource("13_getpj"), ExtResource("14_ryguw")])
 enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
 flying_enemy_scenes = Array[PackedScene]([ExtResource("7_2cqfq")])
 powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])

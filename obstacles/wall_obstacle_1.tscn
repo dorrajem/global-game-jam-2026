@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c0t4g4a53l54v"]
+
+[ext_resource type="Script" uid="uid://owx1vxfbywjq" path="res://obstacles/obstacle.gd" id="1_xsd4h"]
+[ext_resource type="PackedScene" uid="uid://du65303iasdj8" path="res://assets/meshes/wall_1.tscn" id="2_ldfxm"]
+[ext_resource type="PackedScene" uid="uid://ds86wjfgk2jt2" path="res://assets/meshes/wall_4.tscn" id="5_bgfay"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28r6e"]
+size = Vector3(704.5151, 215.28662, 26.998425)
+
+[node name="WallObstacle1" type="StaticBody3D" unique_id=1648039833]
+script = ExtResource("1_xsd4h")
+rotate_speed = 0.0
+bob_height = 0.0
+bob_speed = 0.0
+metadata/_custom_type_script = "uid://owx1vxfbywjq"
+
+[node name="Wall1" parent="." unique_id=1488979940 instance=ExtResource("2_ldfxm")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 15.6, 0, 14)
+
+[node name="Wall4" parent="." unique_id=1141978353 instance=ExtResource("5_bgfay")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -3.2765808, 0, 14)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=250649369]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 1.1729953, 2.7826526, 0.37566683)
+shape = SubResource("BoxShape3D_28r6e")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b0kpsbyily1c1"]
+
+[ext_resource type="Script" uid="uid://owx1vxfbywjq" path="res://obstacles/obstacle.gd" id="1_41gbv"]
+[ext_resource type="PackedScene" uid="uid://boxagyibs51f2" path="res://assets/meshes/tree_1.tscn" id="2_ofnv6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wyjb5"]
+radius = 0.7240424
+
+[node name="Tree1Obstacle" type="StaticBody3D" unique_id=1730134762]
+script = ExtResource("1_41gbv")
+rotate_speed = 0.0
+bob_height = 0.0
+metadata/_custom_type_script = "uid://owx1vxfbywjq"
+
+[node name="TreeObstacle" parent="." unique_id=1099161173 instance=ExtResource("2_ofnv6")]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, -1.8656697, 0, -3.287676)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1060022173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7147343, 0)
+shape = SubResource("SphereShape3D_wyjb5")

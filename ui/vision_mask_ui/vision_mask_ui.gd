@@ -2,14 +2,14 @@ class_name VisionMaskUI
 extends Control
 
 # references
-@onready var top_mask: ColorRect = $TopMask
-@onready var bottom_mask: ColorRect = $BottomMask
+@onready var top_mask: TextureRect = $TopMask
+@onready var bottom_mask: TextureRect = $BottomMask
 @onready var score_label: Label = $ScoreLabel
 @onready var health_label: Label = $HealthLabel
 
 # settings
 @export var min_mask_height : float = 0.0 # full vision
-@export var max_mask_height_percent : float = 0.48 # zero vision (almost)
+@export var max_mask_height_percent : float = 1.0 # zero vision (almost)
 @export var animation_speed : float = 5.0
 
 # state
