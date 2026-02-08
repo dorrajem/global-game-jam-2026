@@ -8,6 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://d0bldgxv5h1a4" path="res://assets/mask/oni_mask_lower.png" id="4_ab6tg"]
 [ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="4_qailb"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jn1nt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ab6tg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bv3xk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k6mba"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_blm3b"]
+
 [node name="UI" type="Control" unique_id=1125060952]
 layout_mode = 3
 anchors_preset = 15
@@ -62,19 +72,18 @@ text = "Score : 0"
 label_settings = ExtResource("2_l2pe0")
 vertical_alignment = 1
 
-[node name="HealthLabel" type="Label" parent="." unique_id=913020059]
+[node name="SpeedLabel" type="Label" parent="." unique_id=913020059]
 layout_mode = 0
 offset_left = 480.0
 offset_top = 10.0
 offset_right = 623.99994
 offset_bottom = 54.0
-text = "100 HP"
+text = "0 Speed"
 label_settings = ExtResource("2_l2pe0")
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="GameOverPanel" type="Panel" parent="." unique_id=982191135]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,8 +100,8 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Separator1" type="Control" parent="GameOverPanel/VBoxContainer" unique_id=701867300]
-custom_minimum_size = Vector2(0, 75)
+[node name="Separator3" type="Control" parent="GameOverPanel/VBoxContainer" unique_id=1275698956]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
 [node name="GameOverLabel" type="Label" parent="GameOverPanel/VBoxContainer" unique_id=586840662]
@@ -102,7 +111,12 @@ label_settings = ExtResource("3_6ke2l")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Separator1" type="Control" parent="GameOverPanel/VBoxContainer" unique_id=701867300]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
 [node name="FinalScoreLabel" type="Label" parent="GameOverPanel/VBoxContainer" unique_id=1247399947]
+visible = false
 layout_mode = 2
 text = "Final Score : 0"
 label_settings = ExtResource("2_l2pe0")
@@ -113,10 +127,18 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(0.43137255, 0, 0.24705882, 1)
+theme_override_colors/font_hover_color = Color(0.8, 0, 0.1882353, 1)
 theme_override_fonts/font = ExtResource("4_qailb")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jn1nt")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ab6tg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bv3xk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_k6mba")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_blm3b")
 text = "Restart"
 
 [node name="Separator2" type="Control" parent="GameOverPanel/VBoxContainer" unique_id=1291625530]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2

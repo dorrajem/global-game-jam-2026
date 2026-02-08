@@ -33,6 +33,7 @@ var dash_direction: Vector3 = Vector3.ZERO
 var is_invulnerable: bool = false
 var invulnerable_timer: float = 0.0
 var slope_velocity_bonus : float = 0.0
+var is_dead : bool = false
 
 # References
 var current_target: Node3D = null
@@ -42,12 +43,15 @@ signal player_died
 signal enemy_killed(enemy: Node3D)
 
 func _ready():
+	is_dead = false
 	# Initialize
 	current_vision = max_vision
 	vision_changed.emit(current_vision, max_vision)
 	add_to_group("player")
 
 func _physics_process(delta: float):
+	if is_dead:
+		return
 	# Update timers
 	if dash_timer > 0:
 		dash_timer -= delta
@@ -63,9 +67,9 @@ func _physics_process(delta: float):
 			is_invulnerable = false
 	
 	# Regenerate vision slowly
-	if current_vision < max_vision and not is_dashing:
-		current_vision = min(current_vision + vision_regen_rate * delta, max_vision)
-		vision_changed.emit(current_vision, max_vision)
+	if not is_dashing and not is_invulnerable:
+		take_damage(vision_regen_rate * delta)
+		#vision_changed.emit(current_vision, max_vision)
 	
 	# Handle movement
 	if is_dashing:
@@ -171,21 +175,22 @@ func _handle_collision_with(body : Node):
 				body.queue_free()
 			current_target = null
 		elif not is_invulnerable and not is_dashing:
-			take_damage()
+			take_damage(vision_loss_per_hit)
 
 func take_damage(damage: float = 0.0):
 	if is_invulnerable or is_dashing:
 		return
 	
 	# Lose vision instead of HP
-	current_vision -= vision_loss_per_hit
+	current_vision -= damage
 	vision_changed.emit(current_vision, max_vision)
 	
 	print("Player took damage! Vision: ", current_vision, "/", max_vision)
 	
 	# Visual feedback
-	VFXManager.spawn_hit_effect(global_position)
-	VFXManager.screen_shake(0.3, 0.1)
+	if (damage == vision_loss_per_hit):
+		VFXManager.spawn_hit_effect(global_position)
+		VFXManager.screen_shake(0.3, 0.1)
 	
 	# Check for death
 	if current_vision <= 0:
@@ -210,10 +215,14 @@ func apply_invulnerability(duration: float):
 	print("Invulnerability active for ", duration, "s")
 
 func die():
+	if is_dead:
+		return
+	
+	is_dead = true
 	print("Player died!")
 	player_died.emit()
-	# You can add death animation/effects here
-	set_physics_process(false)
+	# Don't disable physics - let GameManager handle restart
+	velocity = Vector3.ZERO
 
 func _on_hit_box_body_entered(body: Node3D) -> void:
 	_handle_collision_with(body)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b55qxb1ti3jh2"]
 
 [ext_resource type="Script" uid="uid://owx1vxfbywjq" path="res://obstacles/obstacle.gd" id="1_dee8v"]
-[ext_resource type="PackedScene" uid="uid://cqe8yhg11kng7" path="res://assets/meshes/tree_2.tscn" id="2_dee8v"]
+[ext_resource type="PackedScene" uid="uid://cqe8yhg11kng7" path="res://assets/meshes/trees/tree_2.tscn" id="2_dee8v"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dee8v"]
 radius = 0.099121094

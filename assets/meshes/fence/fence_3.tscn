@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d2yqnekl4gagr"]
+
+[ext_resource type="ArrayMesh" uid="uid://dkakqcvb54gc" path="res://assets/meshes/fence/fence_3.tres" id="1_d7t76"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7t76"]
+size = Vector3(332.603, 31.82159, 273.03296)
+
+[node name="Fence3" type="StaticBody3D" unique_id=543664520]
+collision_layer = 3
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1581615526]
+transform = Transform3D(-4.3711387e-10, -0.01, -4.3711387e-10, 0, -4.3711387e-10, 0.01, -0.01, 4.3711387e-10, 1.9106855e-17, 0, 0.1, 0)
+mesh = ExtResource("1_d7t76")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=106193787]
+transform = Transform3D(-4.3711387e-10, -0.01, -4.3711387e-10, 0, -4.3711387e-10, 0.01, -0.01, 4.3711387e-10, 1.9106855e-17, -5.329173e-08, 1.3264474, 0.00727478)
+shape = SubResource("BoxShape3D_d7t76")

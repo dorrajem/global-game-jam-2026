@@ -115,7 +115,6 @@ shader_parameter/roll_line_amount = 0.3
 shader_parameter/roll_speed = 0.5000004037500005
 shader_parameter/scan_line_strength = -8.0
 shader_parameter/pixel_strength = -2.0
-shader_parameter/master_opacity = 0.350000016625
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
@@ -126,11 +125,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 wall_min_slide_angle = 0.08726646
 floor_stop_on_slope = false
 floor_block_on_wall = false
-max_lateral_speed = 25.0
-gravity = 8.8
-slope_speed_multiplier = 2.5
-air_control = 0.4
-dash_duration = 0.4
 
 [node name="FollowCamera" type="Camera3D" parent="Player" unique_id=1690983954 node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
@@ -244,6 +238,7 @@ metadata/_edit_use_anchors_ = true
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=438888206]
 
 [node name="CRTFilter" type="ColorRect" parent="CanvasLayer2" unique_id=2000394132]
+modulate = Color(1, 1, 1, 0.5019608)
 material = SubResource("ShaderMaterial_1u8w0")
 anchors_preset = 15
 anchor_right = 1.0

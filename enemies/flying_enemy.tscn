@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dknro6n11r6b4"]
 
 [ext_resource type="Script" uid="uid://dppgdow2ncmf" path="res://enemies/flying_enemy.gd" id="1_7cs4o"]
+[ext_resource type="Texture2D" uid="uid://dqpm1vhqaqj3x" path="res://enemies/enemy flying.png" id="2_xh237"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bkui7"]
 radius = 0.001
@@ -19,9 +20,13 @@ height = 0.8
 
 [node name="FlyingEnemy" type="CharacterBody3D" unique_id=1120405791]
 collision_mask = 3
-motion_mode = 1
 script = ExtResource("1_7cs4o")
 metadata/_custom_type_script = "uid://dppgdow2ncmf"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1738671228]
+transform = Transform3D(0.51, 0, 0, 0, 0.51, 0, 0, 0, 0.51, 0, 1, 0)
+billboard = 2
+texture = ExtResource("2_xh237")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1474207797]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -29,8 +34,10 @@ shape = SubResource("SphereShape3D_bkui7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=716240022]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+visible = false
 mesh = SubResource("SphereMesh_0ldpb")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1166364836]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

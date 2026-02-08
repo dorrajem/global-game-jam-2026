@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://8to311d1ip2t"]
 
 [ext_resource type="Script" uid="uid://owx1vxfbywjq" path="res://obstacles/obstacle.gd" id="1_23nsb"]
-[ext_resource type="PackedScene" uid="uid://du65303iasdj8" path="res://assets/meshes/wall_1.tscn" id="2_d1uvs"]
-[ext_resource type="PackedScene" uid="uid://bga7mmhovrv5l" path="res://assets/meshes/wall_3.tscn" id="3_o7wfh"]
-[ext_resource type="PackedScene" uid="uid://ds86wjfgk2jt2" path="res://assets/meshes/wall_4.tscn" id="4_sk1bd"]
+[ext_resource type="PackedScene" uid="uid://du65303iasdj8" path="res://assets/meshes/walls/wall_1.tscn" id="2_d1uvs"]
+[ext_resource type="PackedScene" uid="uid://bga7mmhovrv5l" path="res://assets/meshes/walls/wall_3.tscn" id="3_o7wfh"]
+[ext_resource type="PackedScene" uid="uid://ds86wjfgk2jt2" path="res://assets/meshes/walls/wall_4.tscn" id="4_sk1bd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_28r6e"]
 size = Vector3(452.17615, 252.93457, 40.53418)

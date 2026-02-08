@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b0kpsbyily1c1"]
 
 [ext_resource type="Script" uid="uid://owx1vxfbywjq" path="res://obstacles/obstacle.gd" id="1_41gbv"]
-[ext_resource type="PackedScene" uid="uid://boxagyibs51f2" path="res://assets/meshes/tree_1.tscn" id="2_ofnv6"]
+[ext_resource type="PackedScene" uid="uid://boxagyibs51f2" path="res://assets/meshes/trees/tree_1.tscn" id="2_ofnv6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wyjb5"]
 radius = 0.7240424

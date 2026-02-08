@@ -40,6 +40,8 @@ uniform float roll_speed :hint_range(-8.0, 8.0) = 1.0;
 uniform float scan_line_strength :hint_range(-12.0, -1.0) = -8.0;
 uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
 
+uniform float master_opacity : hint_range(0.0, 1.0) = 1.0;
+
 float random(vec2 uv){
     return fract(cos(uv.x * 83.4827 + uv.y * 92.2842) * 43758.5453123);
 }
@@ -149,6 +151,8 @@ float roll_line(vec2 uv){
 }
 
 void fragment(){
+	vec3 clean_color = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
+	
 	vec2 pix = FRAGCOORD.xy;
 	vec2 pos = warp(SCREEN_UV);
 	
@@ -178,6 +182,6 @@ void fragment(){
 	clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
 	if(vignette_amount > 0.0)clr *= vignette(pos);
 	
-	COLOR.rgb = clr;
+	COLOR.rgb = mix(clean_color, clr, master_opacity);
 	COLOR.a = 1.0;
 }

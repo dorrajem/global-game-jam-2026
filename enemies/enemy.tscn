@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://vjfllgvprsx7"]
 
 [ext_resource type="Script" uid="uid://cr75ru314ehna" path="res://enemies/enemy.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://dtlfut2v68va5" path="res://enemies/normal enemy.png" id="2_7frlh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
-radius = 0.4
+radius = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fw1ev"]
 transparency = 1
@@ -23,14 +24,21 @@ collision_mask = 3
 script = ExtResource("1_7k104")
 metadata/_custom_type_script = "uid://cr75ru314ehna"
 
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2088792593]
+transform = Transform3D(0.51, 0, 0, 0, 0.51, 0, 0, 0, 0.51, 0, 1, 0)
+billboard = 2
+texture = ExtResource("2_7frlh")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1823051974]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4gyqm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1119516756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_7k104")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=277905693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

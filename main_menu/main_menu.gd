@@ -1,7 +1,6 @@
 extends Control
-
-@onready var button_2: Button = $VBoxContainer/Button2
-@onready var button: Button = $VBoxContainer/Button
+@onready var start_button: Button = $VBoxContainer/StartButton
+@onready var exit_button: Button = $VBoxContainer/ExitButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
