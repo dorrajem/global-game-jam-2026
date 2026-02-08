@@ -10,12 +10,14 @@ config_version=5
 
 [application]
 
-config/name="global game jam 2026"
+config/name="Kamen"
+config/description="A high-speed, PS1-style First-Person infinite runner. where a cursed Oni mask physically consumes your field of vision. To survive, you must \"feed\" the mask by dashing through enemies."
+config/version="GlobalGameJam2026"
 run/main_scene="uid://de16sd6tr6jhp"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.263453, 0.007842003, 0.20057732, 1)
 boot_splash/image="uid://cyniasqixu3al"
-config/icon="res://icon.svg"
+config/icon="uid://dwix6aeivq6gv"
 
 [audio]
 
@@ -32,6 +34,7 @@ window/size/viewport_height=480
 window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
+mouse_cursor/custom_image="uid://cri63ejibd7uy"
 
 [importer_defaults]
 
