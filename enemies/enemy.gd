@@ -33,7 +33,7 @@ var max_vol = 0
 
 # adding audio 
 @onready var audio_stream: AudioStreamPlayer3D = $AudioStreamPlayer3D
-var scan_radius:float = 5
+var cluster_range:float = 5
 var group_center_position : Vector3
 var is_leader:bool 
 
@@ -97,21 +97,46 @@ func _physics_process(delta: float) -> void:
 			if distance_to_player > attack_range * 1.2:
 				_change_state(State.CHASE)
 				
-
+	is_leader = _cluster_management(cluster_range)
 	if is_leader: 
-		var center_pos = global_position.distance_to(player.global_position)
+		var hearing_distance = global_position.distance_to(player.global_position)
+		var x_difference = global_position.x - player.global_position.x
 		
-	var x_difference = global_position.x- player.global_position.x
-	if(x_difference > 0):
-		audio_stream.global_position.x = global_position.x - 5
-	else:
-		audio_stream.global_position.x = global_position.x + 5
-	#print(audio_stream.global_position.x)
-	audio_stream.global_position.z = player.global_position.z 		
+		if(x_difference > 0):
+			audio_stream.global_position.x = global_position.x - 5
+		else:
+			audio_stream.global_position.x = global_position.x + 5
+
+		audio_stream.global_position.z = player.global_position.z 	
+		
+
+	
+	
+
 	
 	
 	move_and_slide()
 	
+func _cluster_management(cluster_range: float): 
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	var cluster_enemies = []
+	for enemy in enemies: 
+		if not enemy is Node3D:
+			continue
+		var distance = enemy.global_position.distance_to(global_position)
+		if distance < cluster_range:
+			cluster_enemies.append(enemy)
+
+	var leader = cluster_enemies[0]
+	var distance= cluster_enemies[0].global_position.distance_to(player.global_position)
+	for enemy in cluster_enemies:
+		var calculated_distance = enemy.global_position.distance_to(player.global_position)
+		if calculated_distance < distance: 
+			distance = calculated_distance
+			leader = enemy
+
+	return leader == self
+
 	
 
 	
@@ -153,6 +178,7 @@ func _change_state(new_state : State):
 		State.IDLE:
 			state_timer = randf_range(1.0, 3.0)
 			velocity = Vector3.ZERO
+
 			
 			
 			
@@ -161,14 +187,15 @@ func _change_state(new_state : State):
 		State.WANDER:
 			_set_new_wander_target()
 			state_timer = randf_range(3.0, 6.0)
+			if is_leader:
+				audio_stream.play()
 			
 			
 			
 		
 		State.CHASE:
-			print('audio stream :', audio_stream.global_position)
-			print('player :', player.global_position)
-			audio_stream.play()
+			pass
+
 		
 		State.ATTACK:
 			state_timer = 1.0 # attack cooldown
