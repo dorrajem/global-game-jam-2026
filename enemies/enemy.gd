@@ -39,7 +39,6 @@ var is_leader:bool
 
 func _ready() -> void:
 	spawn_position = global_position
-	add_to_group("enemy")
 	
 	
 	# find player
@@ -220,3 +219,7 @@ func _attack_player():
 func _set_new_wander_target():
 	var random_offset : Vector3 = Vector3(randf_range(-wander_radius, wander_radius), 0, randf_range(-wander_radius, wander_radius))
 	wander_target = spawn_position + random_offset
+
+
+func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+	queue_free()

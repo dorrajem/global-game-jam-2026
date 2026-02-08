@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bgbaeu4qkgppe"]
+
+[ext_resource type="Script" uid="uid://owx1vxfbywjq" path="res://obstacles/obstacle.gd" id="1_1i8ur"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1i8ur"]
+size = Vector3(0.4375, 0.42871094, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1i8ur"]
+albedo_color = Color(0.103743516, 0.10374353, 0.103743516, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1i8ur"]
+material = SubResource("StandardMaterial3D_1i8ur")
+size = Vector3(0.5, 0.5, 1)
+
+[node name="ObstacleSone" type="StaticBody3D" unique_id=1496918776]
+collision_mask = 3
+script = ExtResource("1_1i8ur")
+metadata/_custom_type_script = "uid://owx1vxfbywjq"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=668147765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21435547, 0)
+shape = SubResource("BoxShape3D_1i8ur")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1315302898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23537117, 0)
+mesh = SubResource("BoxMesh_1i8ur")

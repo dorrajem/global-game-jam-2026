@@ -10,11 +10,22 @@ albedo_color = Color(0.8345892, 0.83409923, 7.70092e-07, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_ntv8y"]
 material = SubResource("StandardMaterial3D_ntv8y")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56k2a"]
+albedo_color = Color(0, 1, 0.28235295, 1)
+emission_enabled = true
+emission = Color(0, 1, 0.28235295, 1)
+emission_energy_multiplier = 7.5
+
 [node name="PowerUp" type="Area3D" unique_id=1981916170]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_56k2a")
+effect_duration = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1506720001]
 shape = SubResource("SphereShape3D_ntv8y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1654891393]
+transform = Transform3D(-0.9431376, 0, -0.33014143, 0, 1, 0, 0.33014143, 0, -0.9431376, 0, 0, 0)
 mesh = SubResource("SphereMesh_ntv8y")
+surface_material_override/0 = SubResource("StandardMaterial3D_56k2a")

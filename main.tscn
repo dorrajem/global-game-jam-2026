@@ -2,29 +2,106 @@
 
 [ext_resource type="Script" uid="uid://e7ir03kjeff4" path="res://terrain_generation/terrain_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://vjfllgvprsx7" path="res://enemies/enemy.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://Player/targeting_system/target_indicator.tscn" id="2_7mycd"]
-[ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://Player/Player.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://player/targeting_system/target_indicator.tscn" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://cpcgytufl4ydx" path="res://player/follow_camera.gd" id="2_w48qg"]
+[ext_resource type="PackedScene" uid="uid://bgbaeu4qkgppe" path="res://obstacles/obstacle_sone.tscn" id="3_efxa6"]
+[ext_resource type="PackedScene" uid="uid://yf73o37w4kv7" path="res://player/player.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://4kmisqnv5jaw" path="res://ui/vision_mask_ui/ui.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://Player/targeting_system/targeting_system.tscn" id="4_lquwl"]
-[ext_resource type="PackedScene" uid="uid://deqya4pn8baft" path="res://powerups/powerup.tscn" id="7_4c57u"]
+[ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://player/targeting_system/targeting_system.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c1xnytwvc7tdh" path="res://powerups/powerup_heal.tscn" id="5_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://crjnbch7f34vc" path="res://powerups/powerup_speed.tscn" id="6_w48qg"]
+[ext_resource type="PackedScene" uid="uid://dknro6n11r6b4" path="res://enemies/flying_enemy.tscn" id="7_2cqfq"]
 [ext_resource type="Script" uid="uid://ecoo03mjjmyx" path="res://game_manager/game_manager.gd" id="7_272bh"]
-[ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://Player/dash_telegraph.gd" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://diw7ysi1ymirj" path="res://powerups/powerup_invulnerability.tscn" id="7_vivmo"]
+[ext_resource type="Script" uid="uid://cu46suqky75dn" path="res://player/dash_telegraph.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://dhf3edhtv3635" path="res://vfx/vfx_manager.gd" id="9_kek77"]
+[ext_resource type="Shader" uid="uid://dfb2djrkv8nna" path="res://shaders/ps1_post_processing.gdshader" id="16_2cqfq"]
+[ext_resource type="Shader" uid="uid://by1eyv8eldkf1" path="res://shaders/ps1_models.gdshader" id="16_yaehf"]
+[ext_resource type="Texture2D" uid="uid://bhsdwtfjpty82" path="res://assets/textures/damaged_concrete_floor_diff_4k.jpg" id="17_074og"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ycdy4"]
+sky_top_color = Color(0.23570955, 0, 0.07320034, 1)
+sky_horizon_color = Color(0.37293845, 0.57057774, 0.6112957, 1)
+sky_curve = 0.053033058
+ground_bottom_color = Color(0.20074686, 0.33543596, 0.36478618, 1)
+ground_horizon_color = Color(0.37254903, 0.5686275, 0.6117647, 1)
+use_debanding = false
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_w48qg"]
+sky_material = SubResource("ProceduralSkyMaterial_ycdy4")
+
+[sub_resource type="Environment" id="Environment_ycdy4"]
+background_mode = 2
+sky = SubResource("Sky_w48qg")
+ambient_light_source = 2
+ambient_light_color = Color(0.29456222, 0, 0.0012957881, 1)
+tonemap_mode = 3
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.75
+glow_bloom = 0.3
+fog_enabled = true
+fog_mode = 1
+fog_density = 0.5
+fog_aerial_perspective = 0.75
+fog_sky_affect = 0.5
+fog_depth_curve = 0.4352752
+fog_depth_begin = 20.0
+fog_depth_end = 80.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_anisotropy = 0.8
+volumetric_fog_sky_affect = 0.5
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_2cqfq"]
+frustum_focus_distance = 64.0
+frustum_focal_length = 100.0
+frustum_near = 1.0
+frustum_far = 256.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yaehf"]
+render_priority = 0
+shader = ExtResource("16_yaehf")
+shader_parameter/albedo_texture = ExtResource("17_074og")
+shader_parameter/texture_tile = Vector2(1, 1)
+shader_parameter/snap_enabled = true
+shader_parameter/snap_resolution = 148.0
+shader_parameter/affine_weight = 0.30000001425
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
+shader = ExtResource("16_2cqfq")
+shader_parameter/viewport_size = Vector2(640, 480)
+shader_parameter/virtual_resolution = Vector2(320, 240)
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
+[node name="UI" parent="." unique_id=1125060952 instance=ExtResource("4_1bvp3")]
+
 [node name="Player" parent="." unique_id=1286140647 instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
-[node name="TerrainGenerator" type="Node3D" parent="." unique_id=873277094]
-script = ExtResource("1_ig7tw")
-max_height = 5.0
-enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
-powerup_scenes = Array[PackedScene]([ExtResource("7_4c57u")])
-metadata/_custom_type_script = "uid://e7ir03kjeff4"
+[node name="FollowCamera" type="Camera3D" parent="Player" unique_id=1690983954 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
+doppler_tracking = 2
+current = true
+fov = 62.5
+near = 1.0
+far = 256.0
+script = ExtResource("2_w48qg")
+target = NodePath("..")
+follow_distance = 0.0
+follow_height = 1.0
+follow_smoothness = 10.0
+metadata/_custom_type_script = "uid://cpcgytufl4ydx"
 
-[node name="TargetingSystem" parent="." unique_id=327083549 node_paths=PackedStringArray("player", "target_indicator") instance=ExtResource("4_lquwl")]
+[node name="TargetingSystem" parent="." unique_id=327083549 node_paths=PackedStringArray("player", "camera", "target_indicator") instance=ExtResource("4_lquwl")]
 player = NodePath("../Player")
+camera = NodePath("../Player/FollowCamera")
 target_indicator = NodePath("TargetIndicator")
 
 [node name="TargetIndicator" parent="TargetingSystem" unique_id=1933398823 instance=ExtResource("2_7mycd")]
@@ -33,23 +110,45 @@ visible = false
 [node name="GameManager" type="Node" parent="." unique_id=27361133 node_paths=PackedStringArray("player", "ui_layer")]
 script = ExtResource("7_272bh")
 player = NodePath("../Player")
-ui_layer = NodePath("../CanvasLayer")
+ui_layer = NodePath("../UI")
 metadata/_custom_type_script = "uid://ecoo03mjjmyx"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=581647201]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1435141562]
+transform = Transform3D(0.70710677, 0.49999997, -0.49999997, 0, 0.70710677, 0.70710677, 0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
+shadow_enabled = true
 
-[node name="UI" parent="CanvasLayer" unique_id=265041677 instance=ExtResource("4_1bvp3")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=436450161]
+environment = SubResource("Environment_ycdy4")
+camera_attributes = SubResource("CameraAttributesPhysical_2cqfq")
 
 [node name="DashTelegraph" type="Node3D" parent="." unique_id=1665449141 node_paths=PackedStringArray("player", "targeting_system")]
 script = ExtResource("8_5vw27")
 player = NodePath("../Player")
 targeting_system = NodePath("../TargetingSystem")
+line_color = Color(0.59, 0.45193997, 0.4307, 1)
 metadata/_custom_type_script = "uid://cu46suqky75dn"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1435141562]
-transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, 0, 0, 0)
-shadow_enabled = true
-
-[node name="VFXManager" type="Node3D" parent="." unique_id=2113399577]
+[node name="VFXManager" type="Node3D" parent="." unique_id=2113399577 node_paths=PackedStringArray("canvas_layer")]
 script = ExtResource("9_kek77")
+canvas_layer = NodePath("../CanvasLayer")
 metadata/_custom_type_script = "uid://dhf3edhtv3635"
+
+[node name="TerrainGenerator" type="Node3D" parent="." unique_id=2020132531]
+script = ExtResource("1_ig7tw")
+chunk_width = 35.5
+obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6")])
+enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
+flying_enemy_scenes = Array[PackedScene]([ExtResource("7_2cqfq")])
+powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])
+terrain_material = SubResource("ShaderMaterial_yaehf")
+metadata/_custom_type_script = "uid://e7ir03kjeff4"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=425460047 groups=["canvas_layer"]]
+
+[node name="PS1Filter" type="ColorRect" parent="CanvasLayer" unique_id=558390509]
+material = SubResource("ShaderMaterial_vivmo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -11,10 +11,22 @@ config_version=5
 [application]
 
 config/name="global game jam 2026"
-run/main_scene="uid://bongv1ujfib42"
+run/main_scene="uid://cjoqohheytils"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
+[importer_defaults]
+
+texture={
+&"detect_3d/compress_to": 0
+}
 [audio]
 
 buses/default_bus_layout="uid://d3uwfbn6xuyj1"
@@ -44,10 +56,17 @@ dash={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Enemies"
+3d_physics/layer_2="Ground"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=3
 rendering_device/driver.windows="d3d12"
+shading/overrides/force_vertex_shading=true

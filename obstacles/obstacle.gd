@@ -2,8 +2,8 @@ extends StaticBody3D
 class_name Obstacle
 
 # Optional: Add rotation or movement for visual interest
-@export var rotate_speed: float = 0.0
-@export var bob_height: float = 0.0
+@export var rotate_speed: float = 0.5
+@export var bob_height: float = 1
 @export var bob_speed: float = 1.0
 
 var initial_y: float

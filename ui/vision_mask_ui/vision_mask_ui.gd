@@ -4,6 +4,8 @@ extends Control
 # references
 @onready var top_mask: ColorRect = $TopMask
 @onready var bottom_mask: ColorRect = $BottomMask
+@onready var score_label: Label = $ScoreLabel
+@onready var health_label: Label = $HealthLabel
 
 # settings
 @export var min_mask_height : float = 0.0 # full vision
@@ -11,7 +13,7 @@ extends Control
 @export var animation_speed : float = 5.0
 
 # state
-var current_vision : float = 50.0
+var current_vision : float = 100.0
 var max_vision : float = 100.0
 var target_mask_height : float = 0.0
 
@@ -20,10 +22,11 @@ func _ready() -> void:
 	await get_tree().process_frame
 	var player : CharacterBody3D = get_tree().get_first_node_in_group("player")
 	if player:
-		player.visibility_changed.connect(_on_vision_changed)
-	
+		player.vision_changed.connect(_on_vision_changed)
+		
 	# initialize mask
 	_update_mask_positions(0.0)
+	print("UI Ready")
 
 func _process(delta: float) -> void:
 	# smoothly animate mask height
@@ -46,8 +49,8 @@ func _on_vision_changed(new_vision : float, new_max_vision : float):
 func _update_mask_positions(height : float):
 	if top_mask:
 		top_mask.size.y = height
-		top_mask.position.y = 0
+		#top_mask.position.y = 0
 	if bottom_mask:
 		bottom_mask.size.y = height
-		var screen_height : float = get_viewport_rect().size.y
-		bottom_mask.position.y = screen_height - height
+		#var screen_height : float = get_viewport_rect().size.y
+		#bottom_mask.position.y = screen_height - height

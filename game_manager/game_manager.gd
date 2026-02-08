@@ -3,10 +3,11 @@ class_name GameManager
 
 # References
 @export var player: Player
-@export var ui_layer: CanvasLayer
+@export var ui_layer: Control
 
 # UI elements
 var score_label: Label
+var hp_label : Label
 var game_over_panel: Panel
 var restart_button: Button
 
@@ -19,6 +20,7 @@ signal game_started
 signal game_over
 
 func _ready():
+	self.add_to_group("enemy")
 	# Find player if not assigned
 	if not player:
 		await get_tree().process_frame
@@ -27,12 +29,14 @@ func _ready():
 	if player:
 		player.player_died.connect(_on_player_died)
 		player.enemy_killed.connect(_on_enemy_killed)
+		player.vision_changed.connect(_on_vision_changed)
 	
 	# Find UI elements
 	if ui_layer:
-		score_label = ui_layer.get_children()[0].get_node_or_null("ScoreLabel")
-		game_over_panel = ui_layer.get_children()[0].get_node_or_null("GameOverPanel")
-		restart_button = ui_layer.get_children()[0].get_node_or_null("GameOverPanel/RestartButton")
+		score_label = ui_layer.get_node_or_null("ScoreLabel")
+		hp_label = ui_layer.get_node_or_null("HealthLabel")
+		game_over_panel = ui_layer.get_node_or_null("GameOverPanel")
+		restart_button = ui_layer.get_node_or_null("GameOverPanel/RestartButton")
 		
 		if restart_button:
 			restart_button.pressed.connect(_on_restart_pressed)
@@ -90,4 +94,7 @@ func _update_score_display():
 		score_label.text = "Score: " + str(score)
 
 func _on_restart_pressed():
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://main.tscn")
+
+func _on_vision_changed(new_vision, max_vision):
+	hp_label.text = str(int(new_vision)) +  " HP"
