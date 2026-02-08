@@ -83,7 +83,7 @@ shader_parameter/virtual_resolution = Vector2(320, 240)
 [node name="UI" parent="." unique_id=1125060952 instance=ExtResource("4_1bvp3")]
 
 [node name="Player" parent="." unique_id=1286140647 instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="FollowCamera" type="Camera3D" parent="Player" unique_id=1690983954 node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
@@ -145,7 +145,7 @@ metadata/_custom_type_script = "uid://e7ir03kjeff4"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=425460047 groups=["canvas_layer"]]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=558390509]
+[node name="PS1Filter" type="ColorRect" parent="CanvasLayer" unique_id=558390509]
 material = SubResource("ShaderMaterial_vivmo")
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cjoqohheytils"]
+
+[ext_resource type="Script" uid="uid://1f27jdylkx2u" path="res://main_menu/main_menu.gd" id="1_3shxk"]
+[ext_resource type="Texture2D" uid="uid://b5i7nydk4xb01" path="res://icon.svg" id="1_oa53l"]
+[ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="2_d3a7t"]
+
+[node name="MainMenu" type="Control" unique_id=792542029]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3shxk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=572788553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38779965, 0.36578286, 0.3067203, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=188255922]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Control2" type="Control" parent="VBoxContainer" unique_id=666244004]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=443572542]
+layout_mode = 2
+texture = ExtResource("1_oa53l")
+stretch_mode = 3
+
+[node name="Control4" type="Control" parent="VBoxContainer" unique_id=913997445]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=26209647]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_d3a7t")
+theme_override_font_sizes/font_size = 48
+text = "Start Run"
+
+[node name="Control3" type="Control" parent="VBoxContainer" unique_id=1214254179]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1010482626]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_d3a7t")
+theme_override_font_sizes/font_size = 48
+text = "Quit Game"
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=953218588]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

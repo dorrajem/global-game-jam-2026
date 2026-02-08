@@ -7,8 +7,10 @@ enum PowerupType { HEAL, SPEED_BOOST, INVULNERABILITY }
 @export var powerup_type: PowerupType = PowerupType.HEAL
 @export var heal_amount: float = 30.0
 @export var speed_multiplier: float = 1.5
-@export var effect_duration: float = 5.0
+@export var effect_duration: float = 1.5
 @export var rotation_speed: float = 2.0
+
+@onready var timer: Timer = $ReactionVignette/Timer
 
 signal powerup_pickup(powerup : String)
 
@@ -37,7 +39,7 @@ func _on_body_entered(body: Node3D):
 		# Optional: Add pickup sound/effect here
 		# AudioManager.play_sound("powerup_pickup")
 		VFXManager.spawn_powerup_effect(global_position)
-		queue_free()
+		#queue_free()
 
 func _apply_effect(player: Node3D):
 	match powerup_type:
@@ -97,22 +99,36 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 
 	return null
 
-func _on_pickup_overlay(type : String):
-	var canvas_layer = get_tree().get_first_node_in_group("canvas_layer")
-	if canvas_layer:
-		var rect = TextureRect.new()
-		rect.set_anchors_preset(Control.PRESET_FULL_RECT)
-		
-		match type:
-			"heal":
-				var heal_overlay = preload("res://assets/overlays/heal overlay.png")
-				rect.texture = heal_overlay
-				rect.modulate = Color.GREEN
-			"invul":
-				var shield_overlay = preload("res://assets/overlays/shield overlay.png")
-				rect.texture = shield_overlay
-				rect.modulate = Color.YELLOW
-		
-		canvas_layer.add_child(rect)
-		await get_tree().create_timer(0.5).timeout
-		rect.queue_free()
+func _on_pickup_overlay(type: String):
+	var rect = get_tree().get_first_node_in_group("overlay")
+	if not rect:
+		print("Error: No node found in group 'overlay'")
+		return
+
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rect.visible = true 
+	
+	var target_color: Color
+	var duration : float
+	
+	match type:
+		"heal":
+			rect.texture = preload("res://assets/overlays/heal overlay.png")
+			target_color = Color.GREEN
+			duration = 1.0
+		"invul":
+			rect.texture = preload("res://assets/overlays/shield overlay.png")
+			target_color = Color.YELLOW
+			duration = effect_duration
+		"speed":
+			rect.texture = preload("res://assets/overlays/speed overlay.png")
+			target_color = Color.MEDIUM_PURPLE
+			duration = 1.0
+	
+	var tween = create_tween()
+	await tween.tween_property(rect, "modulate", target_color, duration).finished
+	var tween2 = create_tween()
+	await tween2.tween_property(rect, "modulate:a", 0.0, 0.5).finished
+	tween.kill()
+	queue_free()

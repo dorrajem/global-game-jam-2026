@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="global game jam 2026"
-run/main_scene="uid://bongv1ujfib42"
+run/main_scene="uid://cjoqohheytils"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=640
 window/size/viewport_height=480
-window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 

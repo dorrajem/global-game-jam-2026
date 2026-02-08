@@ -94,7 +94,7 @@ func _update_score_display():
 		score_label.text = "Score: " + str(score)
 
 func _on_restart_pressed():
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://main.tscn")
 
 func _on_vision_changed(new_vision, max_vision):
 	hp_label.text = str(int(new_vision)) +  " HP"
