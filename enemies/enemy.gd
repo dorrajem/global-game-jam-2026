@@ -97,15 +97,15 @@ func _physics_process(delta: float) -> void:
 			if distance_to_player > attack_range * 1.2:
 				_change_state(State.CHASE)
 				
-	is_leader = _handle_group_audio_logic()
+
 	if is_leader: 
-		var center_pos = group_center_position.distance_to(player.global_position)
+		var center_pos = global_position.distance_to(player.global_position)
 		
-	var x_difference = group_center_position.x- player.global_position.x
+	var x_difference = global_position.x- player.global_position.x
 	if(x_difference > 0):
-		audio_stream.global_position.x = group_center_position.x - 5
+		audio_stream.global_position.x = global_position.x - 5
 	else:
-		audio_stream.global_position.x = group_center_position.x + 5
+		audio_stream.global_position.x = global_position.x + 5
 	#print(audio_stream.global_position.x)
 	audio_stream.global_position.z = player.global_position.z 		
 	
@@ -113,29 +113,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	
-func _handle_group_audio_logic() -> bool: 
-	var all_enemies = get_tree().get_nodes_in_group("enemy")
-	var my_cluster = []
-	
-	for enemy in all_enemies: 
-		if (enemy.global_position.distance_to(global_position) < scan_radius):
-			my_cluster.append(enemy)	
-	var leader = my_cluster[0]
-	var average_pos = Vector3.ZERO
-	
-	for enemy in my_cluster:
-		# Calculate average position while we loop
-		average_pos += enemy.global_position
-		
-		# Check ID
-		if enemy.get_instance_id() < leader.get_instance_id():
-			leader = enemy
-			
-	# Finalize Average Position
-	group_center_position = average_pos / my_cluster.size()
-	
-	# 4. Am I the leader?
-	return leader == self
+
 	
 func _find_mesh_instance(node : Node):
 	if node is MeshInstance3D:
@@ -190,8 +168,7 @@ func _change_state(new_state : State):
 		State.CHASE:
 			print('audio stream :', audio_stream.global_position)
 			print('player :', player.global_position)
-			if (is_leader):
-				audio_stream.play()
+			audio_stream.play()
 		
 		State.ATTACK:
 			state_timer = 1.0 # attack cooldown

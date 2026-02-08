@@ -15,6 +15,14 @@ run/main_scene="uid://cjoqohheytils"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://d3uwfbn6xuyj1"
+
+[autoload]
+
+Soundtrack="*uid://domntoyfymj5q"
+
 [display]
 
 window/size/viewport_width=640
@@ -27,13 +35,6 @@ window/stretch/aspect="keep_height"
 texture={
 &"detect_3d/compress_to": 0
 }
-[audio]
-
-buses/default_bus_layout="uid://d3uwfbn6xuyj1"
-
-[autoload]
-
-Soundtrack="*uid://domntoyfymj5q"
 
 [input]
 
