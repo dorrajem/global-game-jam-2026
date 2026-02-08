@@ -1,6 +1,31 @@
 [gd_scene format=3 uid="uid://de16sd6tr6jhp"]
 
-[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_7q7kc"]
+[ext_resource type="AudioStream" uid="uid://ckgbv0l6233nx" path="res://cutscene/Cutscene_Sub_01.00_1.wav" id="1_chqc8"]
+[ext_resource type="Script" uid="uid://dj7discrsgpd6" path="res://cutscene/cutscene.gd" id="1_v82cg"]
+[ext_resource type="Texture2D" uid="uid://d2s7k0lawn5lv" path="res://cutscene/kamen cutscene 1.png" id="1_y1mu1"]
+[ext_resource type="Texture2D" uid="uid://b2hvcgrbkoqil" path="res://cutscene/kamen cutscene 2.png" id="2_chqc8"]
+[ext_resource type="Texture2D" uid="uid://bhkwjrjp1tj6s" path="res://cutscene/kamen cutscene 3.png" id="3_v82cg"]
+[ext_resource type="Texture2D" uid="uid://dfa0xsbnaqg" path="res://cutscene/kamen cutscene 4.png" id="4_1ox3v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6k5ka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y1mu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_chqc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v82cg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1ox3v")
+}],
+"loop": false,
+"name": &"default",
+"speed": 0.5
+}]
 
 [node name="Cutscene" type="Control" unique_id=1050909715]
 layout_mode = 3
@@ -9,15 +34,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_v82cg")
+metadata/_edit_use_anchors_ = true
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1855824323]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-audio_track = 1
-stream = SubResource("VideoStreamTheora_7q7kc")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=893219703]
+position = Vector2(434, 239)
+sprite_frames = SubResource("SpriteFrames_6k5ka")
+autoplay = "default"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite2D" unique_id=1630985920]
+stream = ExtResource("1_chqc8")
 autoplay = true
-expand = true
+
+[connection signal="finished" from="AnimatedSprite2D/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

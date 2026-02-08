@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://player/targeting_system/target_indicator.tscn" id="2_7mycd"]
 [ext_resource type="Script" uid="uid://cpcgytufl4ydx" path="res://player/follow_camera.gd" id="2_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bgbaeu4qkgppe" path="res://obstacles/obstacle_sone.tscn" id="3_efxa6"]
-[ext_resource type="PackedScene" uid="uid://dy6eysbwqfehr" path="res://player/Player.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dy6eysbwqfehr" path="res://player/player.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://4kmisqnv5jaw" path="res://ui/vision_mask_ui/ui.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://player/targeting_system/targeting_system.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c1xnytwvc7tdh" path="res://powerups/powerup_heal.tscn" id="5_ycdy4"]
@@ -25,6 +25,7 @@
 [ext_resource type="Shader" uid="uid://dfb2djrkv8nna" path="res://shaders/ps1_post_processing.gdshader" id="16_2cqfq"]
 [ext_resource type="Shader" uid="uid://by1eyv8eldkf1" path="res://shaders/ps1_models.gdshader" id="16_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bhsdwtfjpty82" path="res://assets/textures/damaged_concrete_floor_diff_4k.jpg" id="17_074og"]
+[ext_resource type="PackedScene" uid="uid://dknro6n11r6b4" path="res://enemies/flying_enemy.tscn" id="20_a6jrf"]
 [ext_resource type="Shader" uid="uid://jbin206xltul" path="res://shaders/crt_shader.gdshader" id="23_d13ii"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ycdy4"]
@@ -133,6 +134,22 @@ follow_height = 1.0
 follow_smoothness = 10.0
 metadata/_custom_type_script = "uid://cpcgytufl4ydx"
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Player/FollowCamera2" unique_id=1314199052]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 0)
+light_energy = 7.5
+light_indirect_energy = 7.5
+light_volumetric_fog_energy = 0.5
+shadow_enabled = true
+shadow_blur = 3.0
+distance_fade_enabled = true
+distance_fade_begin = 32.0
+distance_fade_shadow = 64.0
+distance_fade_length = 128.0
+spot_range = 24.0
+spot_attenuation = -0.5
+spot_angle = 32.0
+spot_angle_attenuation = 1.6245052
+
 [node name="TargetingSystem" parent="." unique_id=327083549 node_paths=PackedStringArray("player", "target_indicator") instance=ExtResource("4_lquwl")]
 player = NodePath("../Player")
 target_indicator = NodePath("TargetIndicator")
@@ -183,6 +200,7 @@ fence_spacing = 3.0
 obstacles_per_chunk = 10
 obstacle_scenes = Array[PackedScene]([ExtResource("3_efxa6"), ExtResource("11_cegan"), ExtResource("12_82xsv"), ExtResource("13_getpj")])
 enemy_scenes = Array[PackedScene]([ExtResource("2_0xm2m")])
+flying_enemy_scenes = Array[PackedScene]([ExtResource("20_a6jrf")])
 powerup_scenes = Array[PackedScene]([ExtResource("5_ycdy4"), ExtResource("6_w48qg"), ExtResource("7_vivmo")])
 terrain_material = SubResource("ShaderMaterial_yaehf")
 metadata/_custom_type_script = "uid://e7ir03kjeff4"
