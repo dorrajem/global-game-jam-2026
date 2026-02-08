@@ -13,6 +13,8 @@ config_version=5
 config/name="global game jam 2026"
 run/main_scene="uid://cjoqohheytils"
 config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/bg_color=Color(0.263453, 0.007842003, 0.20057732, 1)
+boot_splash/image="uid://cyniasqixu3al"
 config/icon="res://icon.svg"
 
 [audio]

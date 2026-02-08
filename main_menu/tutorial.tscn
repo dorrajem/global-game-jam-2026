@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://ctcockorhoo7h"]
+
+[ext_resource type="Texture2D" uid="uid://8kgackr85fs2" path="res://main_menu/how to play kamen.png" id="1_5mgtg"]
+[ext_resource type="Shader" uid="uid://jbin206xltul" path="res://shaders/crt_shader.gdshader" id="2_rj7kb"]
+[ext_resource type="Script" uid="uid://k2b27vgqrrkn" path="res://main_menu/go_back_to_main_menu.gd" id="3_muf12"]
+[ext_resource type="FontFile" uid="uid://bqip545bmnyl1" path="res://ui/fonts/CreeperPixelRegular-DMYx.ttf" id="3_ocgrm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_muf12"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmcxp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsls7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ut3s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocgrm"]
+shader = ExtResource("2_rj7kb")
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/scan_line_amount = 0.50000002375
+shader_parameter/warp_amount = 0.30000001425
+shader_parameter/noise_amount = 0.050000002375
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 1.0
+shader_parameter/roll_line_amount = 0.50000002375
+shader_parameter/roll_speed = 0.5000004037500005
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+shader_parameter/master_opacity = 0.50000002375
+
+[node name="Tutorial" type="Control" unique_id=756050254]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2096763474]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5mgtg")
+
+[node name="GoBack" type="Button" parent="." unique_id=691271716]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -347.0
+offset_top = -61.0
+offset_right = -158.0
+offset_bottom = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(0.43137255, 0, 0.24705882, 1)
+theme_override_colors/font_hover_color = Color(0.8, 0, 0.1882353, 1)
+theme_override_fonts/font = ExtResource("3_ocgrm")
+theme_override_font_sizes/font_size = 72
+theme_override_styles/normal = SubResource("StyleBoxEmpty_muf12")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tmcxp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vsls7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3ut3s")
+text = "Go Back"
+script = ExtResource("3_muf12")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=129732]
+
+[node name="CRTFilter" type="ColorRect" parent="CanvasLayer2" unique_id=653066236]
+modulate = Color(1, 1, 1, 0.5019608)
+material = SubResource("ShaderMaterial_ocgrm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="GoBack" to="GoBack" method="_on_pressed"]

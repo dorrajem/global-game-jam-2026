@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://de16sd6tr6jhp"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_7q7kc"]
+
+[node name="Cutscene" type="Control" unique_id=1050909715]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1855824323]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+audio_track = 1
+stream = SubResource("VideoStreamTheora_7q7kc")
+autoplay = true
+expand = true
