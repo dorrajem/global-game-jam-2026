@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d2k47ug46qryn" path="res://player/targeting_system/target_indicator.tscn" id="2_7mycd"]
 [ext_resource type="Script" uid="uid://cpcgytufl4ydx" path="res://player/follow_camera.gd" id="2_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bgbaeu4qkgppe" path="res://obstacles/obstacle_sone.tscn" id="3_efxa6"]
-[ext_resource type="PackedScene" path="res://player/Player.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dy6eysbwqfehr" path="res://player/Player.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://4kmisqnv5jaw" path="res://ui/vision_mask_ui/ui.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dfity6h7sjcy1" path="res://player/targeting_system/targeting_system.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c1xnytwvc7tdh" path="res://powerups/powerup_heal.tscn" id="5_ycdy4"]
@@ -102,7 +102,7 @@ shader_parameter/roll_line_amount = 0.3
 shader_parameter/roll_speed = 0.5000004037500005
 shader_parameter/scan_line_strength = -8.0
 shader_parameter/pixel_strength = -2.0
-shader_parameter/master_opacity = 0.350000016625
+shader_parameter/master_opacity = 0.50000002375
 
 [node name="Main" type="Node3D" unique_id=46566031]
 
@@ -133,9 +133,8 @@ follow_height = 1.0
 follow_smoothness = 10.0
 metadata/_custom_type_script = "uid://cpcgytufl4ydx"
 
-[node name="TargetingSystem" parent="." unique_id=327083549 node_paths=PackedStringArray("player", "camera", "target_indicator") instance=ExtResource("4_lquwl")]
+[node name="TargetingSystem" parent="." unique_id=327083549 node_paths=PackedStringArray("player", "target_indicator") instance=ExtResource("4_lquwl")]
 player = NodePath("../Player")
-camera = NodePath("../Player/FollowCamera")
 target_indicator = NodePath("TargetIndicator")
 
 [node name="TargetIndicator" parent="TargetingSystem" unique_id=1933398823 instance=ExtResource("2_7mycd")]
